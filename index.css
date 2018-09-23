@@ -1,13 +1,23 @@
 
 /* Navigation Bar Styles */
-ul {
+.navLeft {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
     background-color: #AC2B37;
+    width: 50%;
+    float: left;
 }
 
-
+.navRight {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: blue;
+    width: 50%;
+    float: right;
+}
 
 /* Split Pane Styles */
