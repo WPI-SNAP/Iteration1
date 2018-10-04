@@ -1,45 +1,16 @@
-var http = require('http')
-    , fs   = require('fs')
-    , url  = require('url')
-    , port = 8080;
+var express = require('express'),
+    app = express(),
+    port = process.env.PORT || 8080;
 
-var server = http.createServer (function (req, res) {
-    var uri = url.parse(req.url);
+// Sets relative path for Express to serve files out of views folder
+app.use(express.static(__dirname + '/views'));
 
-    switch( uri.pathname ) {
-        case '/':
-            sendFile(res, 'index.html');
-            break;
-        case '/index.html':
-            sendFile(res, 'index.html');
-            break;
-        case '/index.css':
-            sendCssFile(res, 'index.css');
-            break;
-        default:
-            res.end('404 not found')
-    }
+// Send the landing page file
+app.get('/', function (req, res) {
+    res.sendFile("index.html");
 });
 
-server.listen(process.env.PORT || port);
-console.log('listening on 8080');
-
-// subroutines
-
-function sendFile(res, filename) {
-
-    fs.readFile(filename, function(error, content) {
-        res.writeHead(200, {'Content-type': 'text/html'});
-        res.end(content, 'utf-8')
-    })
-
-}
-
-function sendCssFile(res, filename) {
-
-    fs.readFile(filename, function(error, content) {
-        res.writeHead(200, {'Content-type': 'text/css'});
-        res.end(content, 'utf-8')
-    })
-
-}
+// Listen for the server to start
+app.listen(port, function () {
+    console.log("App is running on PORT: " + port);
+});
