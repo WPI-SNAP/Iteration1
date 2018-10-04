@@ -1,9 +1,28 @@
+var mysql = require('mysql');
 var express = require('express'),
     app = express(),
     port = process.env.PORT || 8080;
 
 // Sets relative path for Express to serve files out of views folder
 app.use(express.static(__dirname + '/views'));
+
+// Create connection to mySQL database
+var connection = mysql.createConnection({
+    //properties
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'snapDB'
+});
+
+connection.connect(function (err) {
+    if(!err) {
+        console.log(err);
+    }
+    else {
+        console.log("DB is connected!")
+    }
+});
 
 // Send the landing page file
 app.get('/', function (req, res) {
