@@ -4,6 +4,7 @@ var express = require('express'),
     port = process.env.PORT || 8080;
 
 // Sets relative path for Express to serve files out of views folder
+app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/views'));
 
 // Create connection to mySQL database

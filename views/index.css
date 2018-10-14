@@ -7,52 +7,16 @@ ul h3 {
     z-index: 1;
 }
 
-/* Navigation Bar Styles */
-.navLeft {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #AC2B37;
-    width: 50%;
-    float: left;
-    z-index: 0;
+/* Navbar Styles */
+.navbar {
+    background-color: #ac2b37;
 }
-
-.navRight {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: blue;
-    width: 50%;
-    float: right;
-    z-index: 0;
+.navbar .navbar-brand {
+    color: #ecf0f1;
 }
-
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #AC2B37;
-}
-
-li {
-    float: left;
-}
-
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 20px 16px;
-    text-decoration: none;
-}
-
-/* Change the link color to #111 (black) on hover */
-li a:hover {
-    background-color: gray;
+.navbar .navbar-brand:hover,
+.navbar .navbar-brand:focus {
+    color: #ffbbbc;
 }
 
 /* Split Pane Styles */
