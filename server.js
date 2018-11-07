@@ -10,14 +10,14 @@ app.use(express.static(__dirname + '/views'));
 // Create connection to mySQL database
 var connection = mysql.createConnection({
     //properties
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'snapDB'
+    host: 'Alfred',
+    port: '3306',
+    user: 'jpalmstrom',
+    password: 'Pa55word'
 });
 
 connection.connect(function (err) {
-    if(!err) {
+    if(err) {
         console.log(err);
     }
     else {
