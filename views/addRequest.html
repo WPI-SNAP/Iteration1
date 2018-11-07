@@ -25,7 +25,13 @@
 
 
     <h2 style="text-align: center">Request Form</h2>
-    <form action="" method="POST">
+    <form action="/submitRequest" method="post">
+
+        <div class="form-group">
+            <label for="requestID">Request ID:</label>
+            <input type="text" class="form-control" id="requestID">
+        </div>
+
         <div class="form-group">
             <label for="goingTo">Ride Going To:</label>
             <input type="text" class="form-control" id="goingTo">
@@ -44,6 +50,11 @@
         <div class="form-group">
             <label for="accommodations">Any Accommodations:</label>
             <input type="text" class="form-control" id="accommodations">
+        </div>
+
+        <div class="form-group">
+            <label for="timeArrived">Time of Request:</label>
+            <input type="text" class="form-control" id="timeArrived">
         </div>
 
         <div class="form-group text-center">

@@ -1,7 +1,11 @@
-var mysql = require('mysql');
-var express = require('express'),
-    app = express(),
-    port = process.env.PORT || 8080;
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 8080;
+const bodyParser = require('body-parser');
+let mysql = require('mysql');
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
 
 // Sets relative path for Express to serve files out of views folder
 app.use(express.static(__dirname + '/public'));
@@ -13,7 +17,8 @@ var connection = mysql.createConnection({
     host: 'Alfred',
     port: '3306',
     user: 'jpalmstrom',
-    password: 'Pa55word'
+    password: 'Pa55word',
+    database: 'dispatcherdb'
 });
 
 connection.connect(function (err) {
@@ -25,10 +30,8 @@ connection.connect(function (err) {
     }
 });
 
-// Send the landing page file
-app.get('/', function (req, res) {
-    res.sendFile("index.html");
-});
+//Define express js routes
+require('./routes/routes.js')(app);
 
 // Listen for the server to start
 app.listen(port, function () {
