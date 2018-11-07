@@ -4,6 +4,9 @@ let mysql = require('mysql');
 module.exports = function (app) {
 
     app.get('/', function (req, res) {
+
+
+
         res.render('/index.html')
     });
 
@@ -13,8 +16,6 @@ module.exports = function (app) {
 
 
     app.post('/submitRequest', function (req, res) {
-
-        console.log("RequestID = " + req.body);
 
         // Connect to the dispatcher database
         let dispatcherDB = mysql.createConnection({
@@ -38,7 +39,7 @@ module.exports = function (app) {
                 return console.error(err.message);
             }
             // Retrieve inserted id
-            console.log('Request Id:' + results.insertId);
+            console.log("Request Id: " + req.body.requestID);
         });
 
         dispatcherDB.end();
