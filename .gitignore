@@ -1,1 +1,4 @@
 ./idea
+# User- specific stuffs
+.idea/workspace.xml
+./idea/tasks.xml
