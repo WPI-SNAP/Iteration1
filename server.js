@@ -3,13 +3,17 @@ const app = express();
 const port = process.env.PORT || 8080;
 const bodyParser = require('body-parser');
 let mysql = require('mysql');
+var path    = require("path");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
 // Sets relative path for Express to serve files out of views folder
-app.use(express.static(__dirname + '/public'));
-app.use(express.static(__dirname + '/views'));
+//app.use(express.static(__dirname + '/public'));
+//app.use(express.static(__dirname + '/views'));
+app.use(express.static(path.join(__dirname, 'views')));
+
+app.set('view engine', 'html');
 
 // Create connection to mySQL database
 var connection = mysql.createConnection({
