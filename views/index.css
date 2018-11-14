@@ -91,32 +91,53 @@ li a:hover {
     width: 100%;
     float: left;
     table-layout: fixed;
+    overflow-y:scroll;
+}
+/*スクロールバーの横幅指定*/
+.dtLeft::-webkit-scrollbar {
+    width: 10px;
+}
+/*スクロールバーの背景色・角丸指定*/
+.dtLeft::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: #f2f2f2;
+}
+/*スクロールバーの色・角丸指定*/
+.dtLeft::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background:#09C9D9;
 }
 
 .dtRight {
     width: 100%;
     float: left;
     table-layout: fixed;
+    overflow-y:scroll;
 }
 
 .From{
     width:20%;
+    height: 20%;
 }
 
 .To{
     width:20%;
+    height:20%;
 }
 
 .Passengers{
     width:10%;
+    height:20%;
 }
 
 .Accom{
     width: 40%;
+    height:20%;
 }
 
 .Time{
     width:10%;
+    height:20%;
 }
 
 .leftTable tr:nth-child(even) td{
