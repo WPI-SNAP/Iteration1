@@ -148,6 +148,33 @@ li a:hover {
     background-color:#AAAAAA;
 }
 
+.From{
+    width:20%;
+}
+
+.To{
+    width:20%;
+}
+
+.Passengers{
+    width:10%;
+}
+
+.Accom{
+    width: 40%;
+}
+
+.Time{
+    width:10%;
+}
+
+.leftTable tr:nth-child(even) td{
+    background-color:#FF6666;
+}
+
+.leftTable tr:nth-child(odd) td{
+    background-color:#AAAAAA;
+}
 .rightTable tr:nth-child(even) td{
     background-color:#3366FF;
 }
