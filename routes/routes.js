@@ -213,6 +213,9 @@ module.exports = function (app) {
         console.log("Inside assignRequest");
         let id = '';
 
+        let allRequests = [];
+
+
         let currChar = '';
         let numSlash = 0;
         //Parse the URL and find the eventid
@@ -228,9 +231,40 @@ module.exports = function (app) {
         console.log('Got URL: ' + req.url);
         console.log('Looking for eventid: ' + id);
 
-        res.render('assignRequest.ejs', {
-           requestId: id
+        let dispatcherDB = mysql.createConnection({
+            host: 'snapdispatcherdb.ca40maoxylrp.us-east-1.rds.amazonaws.com',
+            port: '3306',
+            user: 'masterAdmin',
+            password: 'Pa55word',
+            database: 'dispatcherdb'
         });
+
+        // Execute the insert statement
+        dispatcherDB.query('SELECT * FROM newRequests WHERE idnewrequests = ?', [id], (err, rows) => {
+            if (err) {
+                return console.error(err.message);
+            }
+            else {
+                for (let i in rows) {
+                    allRequests = {
+                        idnewRequests: rows[0].idnewRequests,
+                        rideTo: rows[0].rideTo,
+                        rideFrom: rows[0].rideFrom,
+                        numPassengers: rows[0].numPassengers,
+                        accommodations: rows[0].accommodations,
+                        timeIn: rows[0].timeIn
+                    };
+                }
+                dispatcherDB.end();
+                res.render('assignRequest.ejs', {
+                    request: allRequests
+                });
+            }
+        });
+
+
+
+
     });
 
     // Adds the newRequest to the AWS MySQL DB
@@ -248,12 +282,7 @@ module.exports = function (app) {
         let addRequestStmt = 'INSERT INTO inProcessRequests(rideTo, rideFrom, numPassengers, ' +
             'accommodations, vanNumber, timeIn) VALUES (?, ?, ?, ?, ?, ?)';
 
-        let d = new Date();
-        let timeInMS = d.getTime();
-        const timeOffset = new Date().getTimezoneOffset();
-        let timeIn = timeInMS + timeOffset;
-
-        let newRequest = [req.body.goingTo, req.body.comingFrom, req.body.numPassengers, req.body.accommodations, timeIn];
+        let newRequest = [req.body.goingTo, req.body.comingFrom, req.body.numPassengers, req.body.accommodations, req.body.vanNumber, req.body.timeIn];
 
         // Execute the insert statement
         dispatcherDB.query(addRequestStmt, newRequest, (err, results, fields) => {

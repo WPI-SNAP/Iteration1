@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-default">
+<nav style="background-color: #ac2b37" class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="/index">Home</a>
@@ -23,28 +23,32 @@
 
 <div class="container" style="align-content: center">
 
-
-    <h2 style="text-align: center">Ride Assignment for: <%= requestId%></h2>
+    <h2 style="text-align: center">Ride Assignment for: <%= request.idnewRequests%></h2>
     <form action="/submitAssignRequest" method="post">
 
         <div class="form-group">
             <label>Ride Going To:</label>
-            <input type="text" class="form-control" name="goingTo">
+            <input type="text" class="form-control" value="<%= request.rideTo%>" name="goingTo">
         </div>
 
         <div class="form-group">
             <label>Ride Coming From:</label>
-            <input type="text" class="form-control" name="comingFrom">
+            <input type="text" class="form-control" value="<%= request.rideFrom%>" name="comingFrom">
         </div>
 
         <div class="form-group">
             <label>Number of Passengers:</label>
-            <input type="number" class="form-control" min="0" name="numPassengers">
+            <input type="number" class="form-control" min="0" value="<%= request.numPassengers%>" name="numPassengers">
         </div>
 
         <div class="form-group">
             <label>Any Accommodations:</label>
-            <input type="text" class="form-control" name="accommodations">
+            <input type="text" class="form-control" value="<%= request.accommodations%>" name="accommodations">
+        </div>
+
+        <div class="form-group">
+            <label>Time Received:</label>
+            <input type="text" class="form-control" value="<%= request.timeIn%>" name="timeIn">
         </div>
 
         <div class="form-group">

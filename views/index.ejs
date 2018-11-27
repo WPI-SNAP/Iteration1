@@ -17,8 +17,7 @@
 
     <!-- Left Navigation Bar -->
     <ul class="navLeft">
-        <li><a href="/addRequest">
-                <button>Add a Request</button>
+        <li><a href="/addRequest">Add a Request
             </a></li>
         <h3>New Requests</h3>
     </ul>
@@ -28,19 +27,20 @@
         <table id="leftTable">
             <tr>
                 <!--Using same class name as right table to make them have the same width-->
+                <th class="From">Ride ID</th>
                 <th class="From">From</th>
                 <th class="To">To</th>
-                <th class="Passengers">no. Passengers</th>
+                <th class="Passengers">No. Passengers</th>
                 <th class="Accom">Accommodations</th>
-                <th class="Time">Time In</th>
+                <th class="Time">Time Received</th>
             </tr>
 
             <% newRequestRows.forEach(function (row) { %>
 
                     <tr class="leftTableRow clickable-row" data-id='/assignRequest/<%=row.idnewRequests %>'>
                         <td><%= row.idnewRequests %></td>
-                        <td><%= row.rideTo %></td>
                         <td><%= row.rideFrom %></td>
+                        <td><%= row.rideTo %></td>
                         <td><%= row.numPassengers %></td>
                         <td><%= row.accommodations %></td>
                         <td><%= row.timeIn %></td>
@@ -65,12 +65,13 @@
             <tr>
                 <!--Using same class name as left table to make them have the same width-->
                 <!-- move this outside the table so that it stays-->
+                <th class="From">Ride ID</th>
                 <th class="From">From</th>
                 <th class="To">To</th>
-                <th class="Passengers">no. Passengers</th>
+                <th class="Passengers">No. Passengers</th>
                 <th class="Accom">Accommodations</th>
                 <th class="vanNo">Van No.</th>
-                <th class="Time">Time In</th>
+                <th class="Time">Time Received</th>
             </tr>
             <% inProcessRows.forEach(function (row) { %>
                 <tr>
@@ -79,6 +80,7 @@
                     <td><%= row.rideFrom %></td>
                     <td><%= row.numPassengers %></td>
                     <td><%= row.accommodations %></td>
+                    <td><%= row.vanNumber %></td>
                     <td><%= row.timeIn %></td>
                 </tr>
             <% }); %>
