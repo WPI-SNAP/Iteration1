@@ -129,13 +129,13 @@ module.exports = function (app) {
     });
 
     // Displays AddRequest Page
-    app.get('/addRequest', function (req, res) {
-        res.render('addRequest.ejs');
+    app.get('/deleteRequest', function (req, res) {
+        res.render('deleteRequest.ejs');
     });
 
     // Adds the newRequest to the AWS MySQL DB
-    app.post('/submitRequest', function (req, res) {
-// Connect to the dispatcher database
+    app.post('/submitDeleteRequest', function (req, res) {
+        // Connect to the dispatcher database
         let dispatcherDB = mysql.createConnection({
             host: 'snapdispatcherdb.ca40maoxylrp.us-east-1.rds.amazonaws.com',
             port: '3306',
@@ -146,6 +146,107 @@ module.exports = function (app) {
         // Prepared statement to insert into newrequests table
         let addRequestStmt = 'INSERT INTO newRequests(rideTo, rideFrom, numPassengers, ' +
             'accommodations, timeIn) VALUES (?, ?, ?, ?, ?)';
+
+        let d = new Date();
+        let timeInMS = d.getTime();
+        const timeOffset = new Date().getTimezoneOffset();
+        let timeIn = timeInMS + timeOffset;
+
+        let newRequest = [req.body.goingTo, req.body.comingFrom, req.body.numPassengers, req.body.accommodations, timeIn];
+
+        // Execute the insert statement
+        dispatcherDB.query(addRequestStmt, newRequest, (err, results, fields) => {
+            if (err) {
+                return console.error(err.message);
+            }
+            // Retrieve inserted id
+            console.log("Going to: " + req.body.goingTo);
+        });
+        dispatcherDB.end();
+
+        // Sends the user back to the home page
+        res.redirect('/index');
+    });
+
+    // Displays AddRequest Page
+    app.get('/addRequest', function (req, res) {
+        res.render('addRequest.ejs');
+    });
+
+    // Adds the newRequest to the AWS MySQL DB
+    app.post('/submitDeleteRequest', function (req, res) {
+        // Connect to the dispatcher database
+        let dispatcherDB = mysql.createConnection({
+            host: 'snapdispatcherdb.ca40maoxylrp.us-east-1.rds.amazonaws.com',
+            port: '3306',
+            user: 'masterAdmin',
+            password: 'Pa55word',
+            database: 'dispatcherdb'
+        });
+        // Prepared statement to insert into newrequests table
+        let addRequestStmt = 'INSERT INTO newRequests(rideTo, rideFrom, numPassengers, ' +
+            'accommodations, timeIn) VALUES (?, ?, ?, ?, ?)';
+
+        let d = new Date();
+        let timeInMS = d.getTime();
+        const timeOffset = new Date().getTimezoneOffset();
+        let timeIn = timeInMS + timeOffset;
+
+        let newRequest = [req.body.goingTo, req.body.comingFrom, req.body.numPassengers, req.body.accommodations, timeIn];
+
+        // Execute the insert statement
+        dispatcherDB.query(addRequestStmt, newRequest, (err, results, fields) => {
+            if (err) {
+                return console.error(err.message);
+            }
+            // Retrieve inserted id
+            console.log("Going to: " + req.body.goingTo);
+        });
+        dispatcherDB.end();
+
+        // Sends the user back to the home page
+        res.redirect('/index');
+    });
+
+    // Displays AssignRequest Page
+    app.get('/assignRequest/*', function (req, res) {
+        console.log("Inside assignRequest");
+        let id = '';
+
+        let currChar = '';
+        let numSlash = 0;
+        //Parse the URL and find the eventid
+        for (let i=0; i<req.url.length; i++){
+            currChar = req.url.charAt(i);
+            if(currChar === '/'){
+                numSlash++;
+                continue;
+            }
+            if(numSlash === 2) id += currChar;
+        }
+
+        console.log('Got URL: ' + req.url);
+        console.log('Looking for eventid: ' + id);
+
+        res.render('assignRequest.ejs', {
+           requestId: id
+        });
+    });
+
+    // Adds the newRequest to the AWS MySQL DB
+    app.post('/submitAssignRequest', function (req, res) {
+        console.log("Inside submitAssignRequest");
+        // Connect to the dispatcher database
+        let dispatcherDB = mysql.createConnection({
+            host: 'snapdispatcherdb.ca40maoxylrp.us-east-1.rds.amazonaws.com',
+            port: '3306',
+            user: 'masterAdmin',
+            password: 'Pa55word',
+            database: 'dispatcherdb'
+        });
+        // Prepared statement to insert into newrequests table
+        let addRequestStmt = 'INSERT INTO inProcessRequests(rideTo, rideFrom, numPassengers, ' +
+            'accommodations, vanNumber, timeIn) VALUES (?, ?, ?, ?, ?, ?)';
 
         let d = new Date();
         let timeInMS = d.getTime();
