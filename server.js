@@ -4,6 +4,7 @@ const port = process.env.PORT || 8080;
 const bodyParser = require('body-parser');
 let mysql = require('mysql');
 var path    = require("path");
+let ejs = require('ejs');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
@@ -13,7 +14,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 //app.use(express.static(__dirname + '/views'));
 app.use(express.static(path.join(__dirname, 'views')));
 
-app.set('view engine', 'html');
+app.set('view engine', 'ejs');
 
 // Create connection to mySQL database
 var connection = mysql.createConnection({

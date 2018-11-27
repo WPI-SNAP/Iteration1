@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SNAP</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<div class = "split leftSplit">
+
+    <!-- Left Navigation Bar -->
+    <ul class="navLeft">
+        <li><a href="/addRequest"><button>Add a Request</button></a></li>
+        <h3>New Requests</h3>
+    </ul>
+
+    <!-- Left Table -->
+    <div class="dtLeft">
+        <table id = "leftTable">
+            <tr>
+                <!--Using same class name as right table to make them have the same width-->
+                <th class ="From">From</th>
+                <th class ="To">To</th>
+                <th class ="Passengers">no. Passengers</th>
+                <th class ="Accom">Accommodations</th>
+                <th class="Time">Time In</th>
+            </tr>
+
+            <% newRequestRows.forEach(function (row) { %>
+                <tr>
+                    <td><%= row.idnewRequests %></td>
+                    <td><%= row.rideTo %></td>
+                    <td><%= row.rideFrom %></td>
+                    <td><%= row.numPassengers %></td>
+                    <td><%= row.accommodations %></td>
+                    <td><%= row.timeIn %></td>
+                </tr>
+            <% }); %>
+        </table>
+    </div>
+
+</div>
+
+<div class ="split rightSplit">
+
+    <!-- Right Navigation Bar -->
+    <ul class="navRight">
+        <h3>In Process</h3>
+    </ul>
+
+    <!-- Right Table -->
+    <div class="dtRight">
+        <table class="rightTable">
+            <tr>
+                <!--Using same class name as left table to make them have the same width-->
+                <!-- move this outside the table so that it stays-->
+                <th class ="From">From</th>
+                <th class ="To">To</th>
+                <th class ="Passengers">no. Passengers</th>
+                <th class = "Accom">Accommodations</th>
+                <th class = "vanNo">Van No.</th>
+                <th class ="Time">Time In</th>
+            </tr>
+            <% inProcessRows.forEach(function (row) { %>
+                <tr>
+                    <td><%= row.idnewRequests %></td>
+                    <td><%= row.rideTo %></td>
+                    <td><%= row.rideFrom %></td>
+                    <td><%= row.numPassengers %></td>
+                    <td><%= row.accommodations %></td>
+                    <td><%= row.timeIn %></td>
+                </tr>
+            <% }); %>
+
+        </table>
+    </div>
+</div>
+<script>
+
+
+</script>
+</body>
+</html>

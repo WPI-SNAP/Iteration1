@@ -143,24 +143,28 @@ thread, tbody{
     background:#09C9D9;
 }
 
+#leftTable {
+
+}
+
 /* Making width and height of each column stable for left table*/
-.leftTable .From{
+#leftTable .From{
     width:30%;
 }
 
-.leftTable .To{
+#leftTable .To{
     width:30%;
 }
 
-.leftTable .Passengers{
+#leftTable .Passengers{
     width:10%;
 }
 
-.leftTable .Accom{
+#leftTable .Accom{
     width: 20%; /*can be even smaller*/
 }
 
-.leftTable .Time{
+#leftTable .Time{
     width:10%;
 }
 
@@ -191,11 +195,11 @@ thread, tbody{
 
 
 /* alternate color of table entries*/
-.leftTable tr:nth-child(even) td{
+#leftTable tr:nth-child(even) td{
     background-color:#FF6666;
 }
 
-.leftTable tr:nth-child(odd) td{
+#leftTable tr:nth-child(odd) td{
     background-color:#AAAAAA;
 }
 

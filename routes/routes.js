@@ -1,20 +1,17 @@
 let mysql = require('mysql');
 
-// Connect to the dispatcher database
-let dispatcherDB = mysql.createConnection({
-    host: 'snapdispatcherdb.ca40maoxylrp.us-east-1.rds.amazonaws.com',
-    port: '3306',
-    user: 'masterAdmin',
-    password: 'Pa55word',
-    database: 'dispatcherdb'
-});
-
 module.exports = function (app) {
 
     // Displays index (home) page
     app.get('/', function (req, res) {
 // Connect to the dispatcher database
         console.log("In route /");
+
+        let allNewRequests = [];
+        let currNewRequest = 0;
+        let allProcessRequests = [];
+        let currProcessRequest = 0;
+
         let dispatcherDB = mysql.createConnection({
             host: 'snapdispatcherdb.ca40maoxylrp.us-east-1.rds.amazonaws.com',
             port: '3306',
@@ -28,43 +25,55 @@ module.exports = function (app) {
                 return console.error(err.message);
             }
             else {
+
                 for (let i in rows) {
-                    console.log(rows[i].idnewRequests);
-                    console.log(rows[i].rideTo);
-                    console.log(rows[i].rideFrom);
-                    console.log(rows[i].numPassengers);
-                    console.log(rows[i].accommodations);
-                    console.log(rows[i].timeIn);
+                    allNewRequests[currNewRequest++] = {
+                        idnewRequests: rows[i].idnewRequests,
+                        rideTo: rows[i].rideTo,
+                        rideFrom: rows[i].rideFrom,
+                        numPassengers: rows[i].numPassengers,
+                        accommodations: rows[i].accommodations,
+                        timeIn: rows[i].timeIn
+                    };
                 }
+
+                // Execute the insert statement
+                dispatcherDB.query('SELECT * FROM inProcessRequests', (err, rows) => {
+                    if (err) {
+                        return console.error(err.message);
+                    }
+                    else {
+                        for (let i in rows) {
+                            allProcessRequests[currProcessRequest++] = {
+                                idinProcessRequests: rows[i].idinProcessRequests,
+                                rideTo: rows[i].rideTo,
+                                rideFrom: rows[i].rideFrom,
+                                numPassengers: rows[i].numPassengers,
+                                accommodations: rows[i].accommodations,
+                                vanNumber: rows[i].vanNumber,
+                                timeIn: rows[i].timeIn
+                            };
+                        }
+                        dispatcherDB.end();
+
+                        res.render('index.ejs', {
+                            newRequestRows: allNewRequests,
+                            inProcessRows: allProcessRequests
+                        });
+                    }
+                });
             }
         });
-
-        // Execute the insert statement
-        dispatcherDB.query('SELECT * FROM inProcessRequests', (err, rows) => {
-            if (err) {
-                return console.error(err.message);
-            }
-            else {
-                for (let i in rows) {
-                    console.log(rows[i].idinProcessRequests);
-                    console.log(rows[i].rideTo);
-                    console.log(rows[i].rideFrom);
-                    console.log(rows[i].numPassengers);
-                    console.log(rows[i].accommodations);
-                    console.log(rows[i].vanNumber);
-                    console.log(rows[i].timeIn);
-                }
-            }
-        });
-
-        dispatcherDB.end();
-        res.redirect('index.html');
     });
 
     // Displays index (home) page
     app.get('/index', function (req, res) {
         console.log("In route /index");
-// Connect to the dispatcher database
+        let allNewRequests = [];
+        let currNewRequest = 0;
+        let allProcessRequests = [];
+        let currProcessRequest = 0;
+
         let dispatcherDB = mysql.createConnection({
             host: 'snapdispatcherdb.ca40maoxylrp.us-east-1.rds.amazonaws.com',
             port: '3306',
@@ -72,48 +81,56 @@ module.exports = function (app) {
             password: 'Pa55word',
             database: 'dispatcherdb'
         });
-        // Execute the newrequest SELECT ALL Query
+        // Execute the insert statement
         dispatcherDB.query('SELECT * FROM newRequests', (err, rows) => {
             if (err) {
                 return console.error(err.message);
             }
             else {
+
                 for (let i in rows) {
-                    console.log(rows[i].idnewRequests);
-                    console.log(rows[i].rideTo);
-                    console.log(rows[i].rideFrom);
-                    console.log(rows[i].numPassengers);
-                    console.log(rows[i].accommodations);
-                    console.log(rows[i].timeIn);
+                    allNewRequests[currNewRequest++] = {
+                        idnewRequests: rows[i].idnewRequests,
+                        rideTo: rows[i].rideTo,
+                        rideFrom: rows[i].rideFrom,
+                        numPassengers: rows[i].numPassengers,
+                        accommodations: rows[i].accommodations,
+                        timeIn: rows[i].timeIn
+                    };
                 }
+
+                // Execute the insert statement
+                dispatcherDB.query('SELECT * FROM inProcessRequests', (err, rows) => {
+                    if (err) {
+                        return console.error(err.message);
+                    }
+                    else {
+                        for (let i in rows) {
+                            allProcessRequests[currProcessRequest++] = {
+                                idinProcessRequests: rows[i].idinProcessRequests,
+                                rideTo: rows[i].rideTo,
+                                rideFrom: rows[i].rideFrom,
+                                numPassengers: rows[i].numPassengers,
+                                accommodations: rows[i].accommodations,
+                                vanNumber: rows[i].vanNumber,
+                                timeIn: rows[i].timeIn
+                            };
+                        }
+                        dispatcherDB.end();
+
+                        res.render('index.ejs', {
+                            newRequestRows: allNewRequests,
+                            inProcessRows: allProcessRequests
+                        });
+                    }
+                });
             }
         });
-
-        dispatcherDB.query('SELECT * FROM inProcessRequests', (err, rows) => {
-            if (err) {
-                return console.error(err.message);
-            }
-            else {
-                for (let i in rows) {
-                    console.log(rows[i].idinProcessRequests);
-                    console.log(rows[i].rideTo);
-                    console.log(rows[i].rideFrom);
-                    console.log(rows[i].numPassengers);
-                    console.log(rows[i].accommodations);
-                    console.log(rows[i].vanNumber);
-                    console.log(rows[i].timeIn);
-                }
-            }
-        });
-
-
-        dispatcherDB.end();
-        res.redirect('index.html');
     });
 
     // Displays AddRequest Page
     app.get('/addRequest', function (req, res) {
-        res.render('addRequest.html');
+        res.render('addRequest.ejs');
     });
 
     // Adds the newRequest to the AWS MySQL DB
