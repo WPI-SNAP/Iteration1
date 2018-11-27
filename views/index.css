@@ -189,6 +189,8 @@ thread, tbody{
     width:10%;
 }
 
+
+/* alternate color of table entries*/
 .leftTable tr:nth-child(even) td{
     background-color:#FF6666;
 }
