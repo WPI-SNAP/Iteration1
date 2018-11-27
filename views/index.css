@@ -46,6 +46,7 @@ ul h3 {
     float: left;
     z-index: 0;
     border-radius:10px;
+    color: white;
 }
 
 .navRight {
@@ -58,7 +59,7 @@ ul h3 {
     float: right;
     z-index: 0;
     border-radius:10px;
-
+    color:white;
 }
 
 ul {
@@ -86,85 +87,105 @@ li a:hover {
     background-color: gray;
 }
 
+/* might need this to keep headers on top
+thread, tbody{
+    display:block;
+} */
+
 /* Table styles */
+
 .dtLeft {
     width: 100%;
     float: left;
     table-layout: fixed;
     overflow-y:scroll;
+    height: 100vh; /* necessary for scroll bar to work properly*/
+    text-align: center;
 }
-/*スクロールバーの横幅指定*/
+
+/*width of left scroll bar*/
 .dtLeft::-webkit-scrollbar {
     width: 10px;
 }
-/*スクロールバーの背景色・角丸指定*/
+/*color and background color of left scroll bar*/
 .dtLeft::-webkit-scrollbar-track {
     border-radius: 10px;
     background: #f2f2f2;
 }
-/*スクロールバーの色・角丸指定*/
+/*making left scroll bar round*/
 .dtLeft::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background:#09C9D9;
 }
+
 
 .dtRight {
     width: 100%;
     float: left;
     table-layout: fixed;
     overflow-y:scroll;
+    height:100vh; /* necessary for scroll bar to work properly*/
+    text-align: center;
 }
 
-.From{
-    width:20%;
-    height: 20%;
+/*width of right scroll bar*/
+.dtRight::-webkit-scrollbar {
+    width: 10px;
+}
+/*color and background color of right scroll bar*/
+.dtRight::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: #f2f2f2;
+}
+/*making left scroll bar round*/
+.dtRight::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background:#09C9D9;
 }
 
-.To{
-    width:20%;
-    height:20%;
+/* Making width and height of each column stable for left table*/
+.leftTable .From{
+    width:30%;
 }
 
-.Passengers{
-    width:10%;
-    height:20%;
+.leftTable .To{
+    width:30%;
 }
 
-.Accom{
-    width: 40%;
-    height:20%;
-}
-
-.Time{
-    width:10%;
-    height:20%;
-}
-
-.leftTable tr:nth-child(even) td{
-    background-color:#FF6666;
-}
-
-.leftTable tr:nth-child(odd) td{
-    background-color:#AAAAAA;
-}
-
-.From{
-    width:20%;
-}
-
-.To{
-    width:20%;
-}
-
-.Passengers{
+.leftTable .Passengers{
     width:10%;
 }
 
-.Accom{
-    width: 40%;
+.leftTable .Accom{
+    width: 20%; /*can be even smaller*/
 }
 
-.Time{
+.leftTable .Time{
+    width:10%;
+}
+
+/* Making width and height of each column stable for right table*/
+.rightTable .From{
+    width:30%;
+}
+
+.rightTable .To{
+    width:30%;
+}
+
+.rightTable .Passengers{
+    width:10%;
+}
+
+.rightTable .Accom{
+    width: 10%;
+}
+
+.rightTable .vanNo{
+    width: 10%;
+}
+
+.rightTable .Time{
     width:10%;
 }
 
