@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/WPI-SNAP/Iteration1#readme",
   "dependencies": {
+    "aws-sdk": "^2.363.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "gitignore": "^0.6.0",

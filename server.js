@@ -18,9 +18,9 @@ app.set('view engine', 'html');
 // Create connection to mySQL database
 var connection = mysql.createConnection({
     //properties
-    host: 'Alfred',
+    host: 'snapdispatcherdb.ca40maoxylrp.us-east-1.rds.amazonaws.com',
     port: '3306',
-    user: 'jpalmstrom',
+    user: 'masterAdmin',
     password: 'Pa55word',
     database: 'dispatcherdb'
 });
