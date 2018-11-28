@@ -20,7 +20,7 @@
         </div>
 
         <div style="float:right" class="navbar-header">
-            <a style="color: white" class="navbar-brand" href="/index">Assign Request</a>
+            <a style="color: white" class="navbar-brand clickable-modify" data-id='/assignNewRequest/<%=request.idnewRequests %>'>Assign Request</a>
         </div>
     </div>
 </nav>
@@ -60,17 +60,22 @@
             <input type="text" class="form-control" value="<%= request.timeIn%>" name="timeIn">
         </div>
 
-        <div class="form-group">
-            <label>Van Number:</label>
-            <input type="text" class="form-control" name="vanNumber">
-        </div>
-
         <div class="form-group text-center">
             <input type="submit" id="submit" class="btn btn-secondary btn-lg btn-danger" value="Delete Request">
         </div>
     </form>
 </div>
 
+<script>
+    jQuery(document).ready(function($) {
+        $(".clickable-modify").click(function() {
+            let newId = $(this).data("id");
+            if(newId) {
+                window.location = newId;
+            }
+        });
+    });
+</script>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

@@ -333,12 +333,13 @@ module.exports = function (app) {
         dispatcherDB.query('DELETE FROM newRequests WHERE idnewRequests = ?', [req.body.requestID], function (error, results, fields) {
             if (error) throw error;
             console.log('deleted ' + results.affectedRows + ' rows');
+            // Sends the user back to the home page
+            res.redirect('/index');
         });
 
         dispatcherDB.end();
 
-        // Sends the user back to the home page
-        res.redirect('/index');
+
     });
 
     ////////////////////////////////////////////////////////////////
@@ -432,12 +433,13 @@ module.exports = function (app) {
             }
             // Retrieve inserted id
             console.log("Going to: " + req.body.goingTo);
+            // Sends the user back to the home page
+            res.redirect('/index');
         });
 
         dispatcherDB.end();
 
-        // Sends the user back to the home page
-        res.redirect('/index');
+
     });
 
     // Displays DeleteRequest Page
@@ -511,12 +513,13 @@ module.exports = function (app) {
         dispatcherDB.query('DELETE FROM inProcessRequests WHERE idinProcessRequests = ?', [req.body.requestID], function (error, results, fields) {
             if (error) throw error;
             console.log('deleted ' + results.affectedRows + ' rows');
+            // Sends the user back to the home page
+            res.redirect('/index');
         });
 
         dispatcherDB.end();
 
-        // Sends the user back to the home page
-        res.redirect('/index');
+
     });
 
 };
