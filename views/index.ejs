@@ -75,7 +75,7 @@
             </tr>
             <% inProcessRows.forEach(function (row) { %>
                 <tr>
-                    <td><%= row.idnewRequests %></td>
+                    <td><%= row.idinProcessRequests %></td>
                     <td><%= row.rideTo %></td>
                     <td><%= row.rideFrom %></td>
                     <td><%= row.numPassengers %></td>
@@ -90,7 +90,7 @@
 </div>
 <script>
     jQuery(document).ready(function($) {
-        $(".clickable-row").click(function() {
+        $(".clickable-row").dblclick(function() {
             let newId = $(this).data("id");
             if(newId) {
                 window.location = newId;

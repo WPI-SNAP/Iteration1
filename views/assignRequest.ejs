@@ -16,7 +16,14 @@
 <nav style="background-color: #ac2b37" class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/index">Home</a>
+            <a style="color: white" class="navbar-brand" href="/index">Home</a>
+        </div>
+
+        <div style="float:right " class="navbar-header">
+            <a style="color: white" class="navbar-brand" href="/index">Delete Request</a>
+        </div>
+        <div style="float:right" class="navbar-header">
+            <a style="color: white" class="navbar-brand" href="/index">Assign Request</a>
         </div>
     </div>
 </nav>
@@ -25,6 +32,11 @@
 
     <h2 style="text-align: center">Ride Assignment for: <%= request.idnewRequests%></h2>
     <form action="/submitAssignRequest" method="post">
+
+        <div class="form-group">
+            <label>Request ID:</label>
+            <input type="text" class="form-control" value="<%= request.idnewRequests%>" name="requestID">
+        </div>
 
         <div class="form-group">
             <label>Ride Going To:</label>

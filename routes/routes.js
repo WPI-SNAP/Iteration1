@@ -279,10 +279,10 @@ module.exports = function (app) {
             database: 'dispatcherdb'
         });
         // Prepared statement to insert into newrequests table
-        let addRequestStmt = 'INSERT INTO inProcessRequests(rideTo, rideFrom, numPassengers, ' +
-            'accommodations, vanNumber, timeIn) VALUES (?, ?, ?, ?, ?, ?)';
+        let addRequestStmt = 'INSERT INTO inProcessRequests(idinProcessRequests, rideTo, rideFrom, numPassengers, ' +
+            'accommodations, vanNumber, timeIn) VALUES (?, ?, ?, ?, ?, ?, ?)';
 
-        let newRequest = [req.body.goingTo, req.body.comingFrom, req.body.numPassengers, req.body.accommodations, req.body.vanNumber, req.body.timeIn];
+        let newRequest = [req.body.requestID, req.body.goingTo, req.body.comingFrom, req.body.numPassengers, req.body.accommodations, req.body.vanNumber, req.body.timeIn];
 
         // Execute the insert statement
         dispatcherDB.query(addRequestStmt, newRequest, (err, results, fields) => {
@@ -292,10 +292,17 @@ module.exports = function (app) {
             // Retrieve inserted id
             console.log("Going to: " + req.body.goingTo);
         });
+
+        // Execute the insert statement
+        dispatcherDB.query('DELETE FROM newRequests WHERE idnewRequests = ?', [req.body.requestID], function (error, results, fields) {
+            if (error) throw error;
+            console.log('deleted ' + results.affectedRows + ' rows');
+        });
+
         dispatcherDB.end();
 
         // Sends the user back to the home page
-        res.redirect('/index');
+        res.render('/index');
     });
 
 };

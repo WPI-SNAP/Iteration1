@@ -43,13 +43,14 @@ li a {
 }
 
 /* Change the link color to #111 (black) on hover */
-li a:hover {
+nav div div a:hover {
     background-color: gray;
 }
 
 /* Navbar Styles */
 .navbar {
     background-color: #ac2b37;
+
 }
 .navbar .navbar-brand {
     color: #ecf0f1;
