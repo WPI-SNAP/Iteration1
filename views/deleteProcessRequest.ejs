@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Add a Request</title>
+    <title>Assign Request</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,46 +10,63 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <link rel="stylesheet" href="addRequest.css">
 </head>
 <body>
 
-<nav class="navbar navbar-default">
+<nav style="background-color: #ac2b37" class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/index">Delete Ride Request</a>
+            <a style="color: white" class="navbar-brand" href="/index">Home</a>
+        </div>
+
+        <div style="float:right" class="navbar-header">
+            <a style="color: white" class="navbar-brand" href="/index">Assign Request</a>
         </div>
     </div>
 </nav>
 
 <div class="container" style="align-content: center">
 
+    <h2 style="text-align: center">Delete Ride Request</h2>
+    <form action="/submitDeleteProcessRequest" method="post">
 
-    <h2 style="text-align: center">Request Form</h2>
-    <form action="/submitRequest" method="post">
+        <div class="form-group">
+            <label>Request ID:</label>
+            <input type="text" class="form-control" value="<%= request.idinProcessRequests%>" name="requestID">
+        </div>
 
         <div class="form-group">
             <label>Ride Going To:</label>
-            <input type="text" class="form-control" name="goingTo">
+            <input type="text" class="form-control" value="<%= request.rideTo%>" name="goingTo">
         </div>
 
         <div class="form-group">
             <label>Ride Coming From:</label>
-            <input type="text" class="form-control" name="comingFrom">
+            <input type="text" class="form-control" value="<%= request.rideFrom%>" name="comingFrom">
         </div>
 
         <div class="form-group">
             <label>Number of Passengers:</label>
-            <input type="number" class="form-control" min="0" name="numPassengers">
+            <input type="number" class="form-control" min="0" value="<%= request.numPassengers%>" name="numPassengers">
         </div>
 
         <div class="form-group">
             <label>Any Accommodations:</label>
-            <input type="text" class="form-control" name="accommodations">
+            <input type="text" class="form-control" value="<%= request.accommodations%>" name="accommodations">
+        </div>
+
+        <div class="form-group">
+            <label>Van Number:</label>
+            <input type="text" class="form-control" value="<%= request.vanNumber%>" name="vanNumber">
+        </div>
+
+        <div class="form-group">
+            <label>Time Received:</label>
+            <input type="text" class="form-control" value="<%= request.timeIn%>" name="timeIn">
         </div>
 
         <div class="form-group text-center">
-            <input type="submit" id="submit" class="btn btn-secondary btn-lg" value="Submit">
+            <input type="submit" id="submit" class="btn btn-secondary btn-lg btn-danger" value="Delete Request">
         </div>
     </form>
 </div>

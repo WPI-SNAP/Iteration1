@@ -19,9 +19,6 @@
             <a style="color: white" class="navbar-brand" href="/index">Home</a>
         </div>
 
-        <div style="float:right " class="navbar-header">
-            <a style="color: white" class="navbar-brand" href="/index">Delete Request</a>
-        </div>
         <div style="float:right" class="navbar-header">
             <a style="color: white" class="navbar-brand" href="/index">Assign Request</a>
         </div>
@@ -30,8 +27,8 @@
 
 <div class="container" style="align-content: center">
 
-    <h2 style="text-align: center">Ride Assignment for: <%= request.idnewRequests%></h2>
-    <form action="/submitAssignRequest" method="post">
+    <h2 style="text-align: center">Delete Ride Request</h2>
+    <form action="/submitDeleteNewRequest" method="post">
 
         <div class="form-group">
             <label>Request ID:</label>
@@ -64,12 +61,12 @@
         </div>
 
         <div class="form-group">
-            <label>Assign Van Number:</label>
+            <label>Van Number:</label>
             <input type="text" class="form-control" name="vanNumber">
         </div>
 
         <div class="form-group text-center">
-            <input type="submit" id="submit" class="btn btn-secondary btn-lg" value="Submit">
+            <input type="submit" id="submit" class="btn btn-secondary btn-lg btn-danger" value="Delete Request">
         </div>
     </form>
 </div>

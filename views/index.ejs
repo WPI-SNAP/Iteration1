@@ -37,7 +37,7 @@
 
             <% newRequestRows.forEach(function (row) { %>
 
-                    <tr class="leftTableRow clickable-row" data-id='/assignRequest/<%=row.idnewRequests %>'>
+                    <tr class="leftTableRow clickable-row" data-id='/assignNewRequest/<%=row.idnewRequests %>'>
                         <td><%= row.idnewRequests %></td>
                         <td><%= row.rideFrom %></td>
                         <td><%= row.rideTo %></td>
@@ -74,7 +74,7 @@
                 <th class="Time">Time Received</th>
             </tr>
             <% inProcessRows.forEach(function (row) { %>
-                <tr>
+                <tr class="clickable-row-process" data-id='/assignProcessRequest/<%=row.idinProcessRequests %>'>
                     <td><%= row.idinProcessRequests %></td>
                     <td><%= row.rideTo %></td>
                     <td><%= row.rideFrom %></td>
@@ -91,6 +91,18 @@
 <script>
     jQuery(document).ready(function($) {
         $(".clickable-row").dblclick(function() {
+            let newId = $(this).data("id");
+            if(newId) {
+                window.location = newId;
+            }
+
+        });
+    });
+</script>
+
+<script>
+    jQuery(document).ready(function($) {
+        $(".clickable-row-process").dblclick(function() {
             let newId = $(this).data("id");
             if(newId) {
                 window.location = newId;
