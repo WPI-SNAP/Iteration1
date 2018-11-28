@@ -1,4 +1,5 @@
 let mysql = require('mysql');
+const moment = require('moment');
 
 module.exports = function (app) {
 
@@ -147,12 +148,7 @@ module.exports = function (app) {
         let addRequestStmt = 'INSERT INTO newRequests(rideTo, rideFrom, numPassengers, ' +
             'accommodations, timeIn) VALUES (?, ?, ?, ?, ?)';
 
-        let d = new Date();
-        let timeInMS = d.getTime();
-        const timeOffset = new Date().getTimezoneOffset();
-        let timeIn = timeInMS + timeOffset;
-
-        let newRequest = [req.body.goingTo, req.body.comingFrom, req.body.numPassengers, req.body.accommodations, timeIn];
+        let newRequest = [req.body.goingTo, req.body.comingFrom, req.body.numPassengers, req.body.accommodations, moment(new Date()).toString()];
 
         // Execute the insert statement
         dispatcherDB.query(addRequestStmt, newRequest, (err, results, fields) => {
