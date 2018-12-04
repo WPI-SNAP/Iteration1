@@ -43,7 +43,7 @@
                         <td><%= row.rideTo %></td>
                         <td><%= row.numPassengers %></td>
                         <td><%= row.accommodations %></td>
-                        <td><%= row.timeIn %></td>
+                        <td><%= row.timeIn.slice(16, 21) %></td>
                     </tr>
 
             <% }); %>
@@ -56,7 +56,11 @@
 
     <!-- Right Navigation Bar -->
     <ul class="navRight">
-        <h3>In Process</h3>
+
+        <li style="float: right">
+            <a href="/viewArchive">View Archive</a>
+        </li>
+        <h3 style="text-align: center">In Process Requests</h3>
     </ul>
 
     <!-- Right Table -->
@@ -81,7 +85,7 @@
                     <td><%= row.numPassengers %></td>
                     <td><%= row.accommodations %></td>
                     <td><%= row.vanNumber %></td>
-                    <td><%= row.timeIn %></td>
+                    <td><%= row.timeIn.slice(16, 21) %></td>
                 </tr>
             <% }); %>
 

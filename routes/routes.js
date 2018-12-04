@@ -326,14 +326,25 @@ module.exports = function (app) {
             database: 'dispatcherdb'
         });
 
-        dispatcherDB.query('DELETE FROM newRequests WHERE idnewRequests = ?', [req.body.requestID], function (error, results, fields) {
-            if (error) throw error;
-            console.log('deleted ' + results.affectedRows + ' rows');
-            // Sends the user back to the home page
-            res.redirect('/index');
-        });
+        // Prepared statement to insert into archivedRequests table
+        let addArchivedRequestStmt = 'INSERT INTO archivedRequests(idarchivedRequests, rideTo, rideFrom, numPassengers, ' +
+            'accommodations, timeIn) VALUES (?, ?, ?, ?, ?, ?)';
 
-        dispatcherDB.end();
+        let newRequest = [req.body.requestID, req.body.goingTo, req.body.comingFrom, req.body.numPassengers, req.body.accommodations, req.body.timeIn];
+
+        // Execute the insert statement
+        dispatcherDB.query(addArchivedRequestStmt, newRequest, (err, results, fields) => {
+            if (err) {
+                return console.error(err.message);
+            }
+            dispatcherDB.query('DELETE FROM newRequests WHERE idnewRequests = ?', [req.body.requestID], function (error, results, fields) {
+                if (error) throw error;
+                console.log('deleted ' + results.affectedRows + ' rows');
+                // Sends the user back to the home page
+                res.redirect('/index');
+            });
+            dispatcherDB.end();
+        });
 
 
     });
@@ -410,12 +421,6 @@ module.exports = function (app) {
             password: 'Pa55word',
             database: 'dispatcherdb'
         });
-        // Execute the insert statement
-        dispatcherDB.query('DELETE FROM inProcessRequests WHERE idinProcessRequests = ?', [req.body.requestID], function (error, results, fields) {
-            if (error) throw error;
-            console.log('deleted ' + results.affectedRows + ' rows');
-        });
-
         // Prepared statement to insert into newrequests table
         let addRequestStmt = 'INSERT INTO inProcessRequests(idinProcessRequests, rideTo, rideFrom, numPassengers, ' +
             'accommodations, vanNumber, timeIn) VALUES (?, ?, ?, ?, ?, ?, ?)';
@@ -427,14 +432,19 @@ module.exports = function (app) {
             if (err) {
                 return console.error(err.message);
             }
+
+            // Execute the insert statement
+            dispatcherDB.query('DELETE FROM inProcessRequests WHERE idinProcessRequests = ?', [req.body.requestID], function (error, results, fields) {
+                if (error) throw error;
+                console.log('deleted ' + results.affectedRows + ' rows');
+            });
+
             // Retrieve inserted id
             console.log("Going to: " + req.body.goingTo);
             // Sends the user back to the home page
             res.redirect('/index');
         });
-
         dispatcherDB.end();
-
 
     });
 
@@ -505,17 +515,67 @@ module.exports = function (app) {
             database: 'dispatcherdb'
         });
 
-        // Execute the insert statement
-        dispatcherDB.query('DELETE FROM inProcessRequests WHERE idinProcessRequests = ?', [req.body.requestID], function (error, results, fields) {
-            if (error) throw error;
-            console.log('deleted ' + results.affectedRows + ' rows');
-            // Sends the user back to the home page
-            res.redirect('/index');
-        });
+        // Prepared statement to insert into archivedRequests table
+        let addArchivedRequestStmt = 'INSERT INTO archivedRequests(idarchivedRequests, rideTo, rideFrom, numPassengers, ' +
+            'accommodations, vanNumber, timeIn) VALUES (?, ?, ?, ?, ?, ?, ?)';
 
+        let newRequest = [req.body.requestID, req.body.goingTo, req.body.comingFrom, req.body.numPassengers, req.body.accommodations, req.body.vanNumber, req.body.timeIn];
+
+        // Execute the insert statement
+        dispatcherDB.query(addArchivedRequestStmt, newRequest, (err, results, fields) => {
+            if (err) {
+                return console.error(err.message);
+            }
+            // Execute the insert statement
+            dispatcherDB.query('DELETE FROM inProcessRequests WHERE idinProcessRequests = ?', [req.body.requestID], function (error, results, fields) {
+                if (error) throw error;
+                console.log('deleted ' + results.affectedRows + ' rows');
+                // Sends the user back to the home page
+                res.redirect('/index');
+            });
+        });
         dispatcherDB.end();
 
+    });
 
+    app.get('/viewArchive', function (req, res) {
+        console.log("Inside viewArchive");
+
+        let allArchivedRequests = [];
+        let currArchivedRequest = 0;
+
+        let dispatcherDB = mysql.createConnection({
+            host: 'snapdispatcherdb.ca40maoxylrp.us-east-1.rds.amazonaws.com',
+            port: '3306',
+            user: 'masterAdmin',
+            password: 'Pa55word',
+            database: 'dispatcherdb'
+        });
+
+        // Query all results from the archivedRequests table
+        dispatcherDB.query('SELECT * FROM archivedRequests', (err, rows) => {
+            if (err) {
+                return console.error(err.message);
+            }
+            else {
+                for (let i in rows) {
+                    allArchivedRequests[currArchivedRequest++] = {
+                        idarchivedRequests: rows[i].idarchivedRequests,
+                        rideTo: rows[i].rideTo,
+                        rideFrom: rows[i].rideFrom,
+                        numPassengers: rows[i].numPassengers,
+                        accommodations: rows[i].accommodations,
+                        vanNumber: rows[i].vanNumber,
+                        timeIn: rows[i].timeIn
+                    };
+                }
+                dispatcherDB.end();
+
+                res.render('archive.ejs', {
+                    archivedRequestRows: allArchivedRequests
+                });
+            }
+        })
     });
 
 };

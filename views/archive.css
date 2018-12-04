@@ -1,0 +1,52 @@
+/* START: Navbar Styles */
+.navbar {
+    background-color: #ac2b37;
+}
+.navbar .navbar-brand {
+    color: #ecf0f1;
+}
+.navbar .navbar-brand:hover,
+.navbar .navbar-brand:focus {
+    color: #ffbbbc;
+}
+/* END: Navbar Styles */
+
+/* START: Table Styles */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td {
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.archiveID {
+    width: 10%;
+}
+
+.archiveFrom {
+    width: 15%;
+}
+
+.archiveTo {
+    width: 15%;
+}
+
+.archivePassengers {
+    width: 10%;
+}
+
+.archiveAccom {
+    width: 25%;
+}
+
+.archiveVanNo {
+    width: 10%;
+}
+
+.archiveTime {
+    width: 15%;
+}
+/* END: Table Styles */
