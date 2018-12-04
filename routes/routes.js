@@ -157,12 +157,10 @@ module.exports = function (app) {
             }
             // Retrieve inserted id
             console.log("Going to: " + req.body.goingTo);
+            dispatcherDB.end();
             // Sends the user back to the home page
             res.redirect('/index');
         });
-        dispatcherDB.end();
-
-
     });
 
     // Displays AssignRequest Page
@@ -250,13 +248,10 @@ module.exports = function (app) {
         dispatcherDB.query('DELETE FROM newRequests WHERE idnewRequests = ?', [req.body.requestID], function (error, results, fields) {
             if (error) throw error;
             console.log('deleted ' + results.affectedRows + ' rows');
-
+            dispatcherDB.end();
             // Sends the user back to the home page
             res.redirect('/index');
         });
-
-        dispatcherDB.end();
-
 
     });
 
@@ -341,9 +336,10 @@ module.exports = function (app) {
                 if (error) throw error;
                 console.log('deleted ' + results.affectedRows + ' rows');
                 // Sends the user back to the home page
+                dispatcherDB.end();
                 res.redirect('/index');
             });
-            dispatcherDB.end();
+
         });
 
 
@@ -442,9 +438,10 @@ module.exports = function (app) {
             // Retrieve inserted id
             console.log("Going to: " + req.body.goingTo);
             // Sends the user back to the home page
+            dispatcherDB.end();
             res.redirect('/index');
         });
-        dispatcherDB.end();
+
 
     });
 
@@ -531,10 +528,11 @@ module.exports = function (app) {
                 if (error) throw error;
                 console.log('deleted ' + results.affectedRows + ' rows');
                 // Sends the user back to the home page
+                dispatcherDB.end();
                 res.redirect('/index');
             });
         });
-        dispatcherDB.end();
+
 
     });
 
