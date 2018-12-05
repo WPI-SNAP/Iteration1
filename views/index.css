@@ -40,7 +40,7 @@ ul h3 {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #CC0033;
+    background-color: #ac2b37;
     width: 100%;
     float: left;
     z-index: 0;
@@ -53,7 +53,7 @@ ul h3 {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #3333CC;
+    background-color: #2bac94;
     width: 100%;
     float: right;
     z-index: 0;
@@ -202,19 +202,19 @@ td{
 
 /* alternate color of table entries*/
 #leftTable tr:nth-child(even) td{
-    background-color:#AC2B37;
+    background-color:#e0858e;
 }
 
 #leftTable tr:nth-child(odd) td{
-    background-color:#AAAAAA;
+    background-color:#DCDCDC;
 }
 
 .rightTable tr:nth-child(even) td{
-    background-color:#3366FF;
+    background-color:#85e0d0;
 }
 
 .rightTable tr:nth-child(odd) td{
-    background-color:#AAAAAA;
+    background-color:#DCDCDC;
 }
 
 /* Tooltip style */

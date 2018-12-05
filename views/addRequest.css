@@ -27,45 +27,36 @@ body {
     background-color: #ac2b37;
 }
 nav {
-
     background: #aaa;
-    box-shadow: 0px 5px 0px #dedede;
+    box-shadow: 0px 5px 0px #2eb89e;
 }
 nav ul {
     list-style: none;
     text-align: left;
+
 }
 nav ul li {
     display: inline-block;
+    margin-left: -50%;
 }
 nav ul li a {
     display: block;
     text-decoration: none;
-    color: #aaa;
+    color: black;
     font-weight: 800;
-    text-transform: uppercase;
-    margin-top: 35%;
+    font-size: larger;
     box-sizing: border-box;
 }
 nav ul li a,
 nav ul li a:after,
 nav ul li a:before {
-    transition: all .5s;
+    transition: all 1s;
 }
 nav ul li a:hover {
-    color: #ffbbbc;
-}
+     color: white;
+ }
 
-/* stroke */
-nav.stroke ul li a,
-nav.fill ul li a {
-    position: relative;
-}
 
-nav.stroke ul li a:after,
-nav.stroke ul li a:hover:after {
-    width: 100%;
-}
 /* END: Navbar Styles */
 
 h2 {
