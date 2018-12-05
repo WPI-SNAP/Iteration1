@@ -2,7 +2,6 @@ html,body{
     height:100%;
     margin:0;
     padding:0;
-    background-color:#80808059;
 }
 
 /*split pane styles*/
@@ -87,12 +86,22 @@ li a:hover {
     background-color: gray;
 }
 
-/* might need this to keep headers on top
-thread, tbody{
-    display:block;
-} */
-
 /* Table styles */
+
+/* Table header- color and position*/
+th{
+    background-color: #8B8E81;
+    position: sticky; top:0; /* Makes header stick to the top */
+}
+
+/* td styles*/
+td{
+    height: 50px; /* temp value for fixed height*/
+    max-width: 50px;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 
 .dtLeft {
     width: 100%;
@@ -101,6 +110,7 @@ thread, tbody{
     overflow-y:scroll;
     height: 100vh; /* necessary for scroll bar to work properly*/
     text-align: center;
+
 }
 
 /*width of left scroll bar*/
@@ -141,10 +151,6 @@ thread, tbody{
 .dtRight::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background:#09C9D9;
-}
-
-#leftTable {
-
 }
 
 /* Making width and height of each column stable for left table*/
@@ -196,7 +202,7 @@ thread, tbody{
 
 /* alternate color of table entries*/
 #leftTable tr:nth-child(even) td{
-    background-color:#FF6666;
+    background-color:#AC2B37;
 }
 
 #leftTable tr:nth-child(odd) td{
