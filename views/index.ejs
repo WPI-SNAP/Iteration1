@@ -42,7 +42,9 @@
                         <td><%= row.rideFrom %></td>
                         <td><%= row.rideTo %></td>
                         <td><%= row.numPassengers %></td>
-                        <td><%= row.accommodations %></td>
+                        <td class ="hasTooltip"><%= row.accommodations %>
+                            <span><%= row.accommodations %></span>
+                        </td>
                         <td><%= row.timeIn.slice(16, 21) %></td>
                     </tr>
 
@@ -83,7 +85,9 @@
                     <td><%= row.rideTo %></td>
                     <td><%= row.rideFrom %></td>
                     <td><%= row.numPassengers %></td>
-                    <td><%= row.accommodations %></td>
+                    <td class = "hasTooltip"><%= row.accommodations %>
+                        <span><%= row.accommodations %></span>
+                    </td>
                     <td><%= row.vanNumber %></td>
                     <td><%= row.timeIn.slice(16, 21) %></td>
                 </tr>
