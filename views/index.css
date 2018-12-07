@@ -140,6 +140,27 @@ td{
     background-color:#DCDCDC;
 }
 
+/* Making width and height of each column stable for left table*/
+.leftTable .From{
+    width:30%;
+}
+
+.leftTable .To{
+    width:30%;
+}
+
+.leftTable .Passengers{
+    width:10%;
+}
+
+.leftTable .Accom{
+    width: 20%; /*can be even smaller*/
+}
+
+.leftTable .Time{
+    width:10%;
+}
+
 /* right table styles */
 .dtRight {
     width: 100%;
@@ -174,6 +195,32 @@ td{
 .rightTable tr:nth-child(odd) td{
     background-color:#DCDCDC;
 }
+
+/* Making width and height of each column stable for right table*/
+.rightTable .From{
+    width:30%;
+}
+
+.rightTable .To{
+    width:30%;
+}
+
+.rightTable .Passengers{
+    width:10%;
+}
+
+.rightTable .Accom{
+    width: 10%;
+}
+
+.rightTable .vanNo{
+    width: 10%;
+}
+
+.rightTable .Time{
+    width:10%;
+}
+
 
 /* Tooltip styles
     td with tooltip will be in the class hasTooltip
