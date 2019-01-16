@@ -53,7 +53,7 @@ ul h3 {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #2bac94;
+    background-color: #0052cc;
     width: 100%;
     float: right;
     z-index: 0;
@@ -189,7 +189,7 @@ td{
 
 /* alternate color of table entries */
 .rightTable tr:nth-child(even) td{
-    background-color:#85e0d0;
+    background-color:#80b3ff;
 }
 
 .rightTable tr:nth-child(odd) td{
