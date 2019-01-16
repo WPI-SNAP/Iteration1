@@ -23,7 +23,7 @@ var connection = mysql.createConnection({
     port: '3306',
     user: 'masterAdmin',
     password: 'Pa55word',
-    database: 'dispatcherdb'
+    database: 'snapDB'
 });
 
 connection.connect(function (err) {

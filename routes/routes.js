@@ -18,7 +18,7 @@ module.exports = function (app) {
             port: '3306',
             user: 'masterAdmin',
             password: 'Pa55word',
-            database: 'dispatcherdb'
+            database: 'snapDB'
         });
         // Execute the insert statement
         dispatcherDB.query('SELECT * FROM newRequests', (err, rows) => {
@@ -80,7 +80,7 @@ module.exports = function (app) {
             port: '3306',
             user: 'masterAdmin',
             password: 'Pa55word',
-            database: 'dispatcherdb'
+            database: 'snapDB'
         });
         // Execute the insert statement
         dispatcherDB.query('SELECT * FROM newRequests', (err, rows) => {
@@ -142,7 +142,7 @@ module.exports = function (app) {
             port: '3306',
             user: 'masterAdmin',
             password: 'Pa55word',
-            database: 'dispatcherdb'
+            database: 'snapDB'
         });
         // Prepared statement to insert into newrequests table
         let addRequestStmt = 'INSERT INTO newRequests(rideTo, rideFrom, numPassengers, ' +
@@ -189,7 +189,7 @@ module.exports = function (app) {
             port: '3306',
             user: 'masterAdmin',
             password: 'Pa55word',
-            database: 'dispatcherdb'
+            database: 'snapDB'
         });
 
         // Execute the insert statement
@@ -227,7 +227,7 @@ module.exports = function (app) {
             port: '3306',
             user: 'masterAdmin',
             password: 'Pa55word',
-            database: 'dispatcherdb'
+            database: 'snapDB'
         });
         // Prepared statement to insert into newrequests table
         let addRequestStmt = 'INSERT INTO inProcessRequests(idinProcessRequests, rideTo, rideFrom, numPassengers, ' +
@@ -282,7 +282,7 @@ module.exports = function (app) {
             port: '3306',
             user: 'masterAdmin',
             password: 'Pa55word',
-            database: 'dispatcherdb'
+            database: 'snapDB'
         });
 
         // Execute the insert statement
@@ -318,7 +318,7 @@ module.exports = function (app) {
             port: '3306',
             user: 'masterAdmin',
             password: 'Pa55word',
-            database: 'dispatcherdb'
+            database: 'snapDB'
         });
 
         // Prepared statement to insert into archivedRequests table
@@ -377,7 +377,7 @@ module.exports = function (app) {
             port: '3306',
             user: 'masterAdmin',
             password: 'Pa55word',
-            database: 'dispatcherdb'
+            database: 'snapDB'
         });
 
         // Execute the insert statement
@@ -415,7 +415,7 @@ module.exports = function (app) {
             port: '3306',
             user: 'masterAdmin',
             password: 'Pa55word',
-            database: 'dispatcherdb'
+            database: 'snapDB'
         });
         // Prepared statement to insert into newrequests table
         let addRequestStmt = 'INSERT INTO inProcessRequests(idinProcessRequests, rideTo, rideFrom, numPassengers, ' +
@@ -472,7 +472,7 @@ module.exports = function (app) {
             port: '3306',
             user: 'masterAdmin',
             password: 'Pa55word',
-            database: 'dispatcherdb'
+            database: 'snapDB'
         });
 
         // Execute the insert statement
@@ -509,7 +509,7 @@ module.exports = function (app) {
             port: '3306',
             user: 'masterAdmin',
             password: 'Pa55word',
-            database: 'dispatcherdb'
+            database: 'snapDB'
         });
 
         // Prepared statement to insert into archivedRequests table
@@ -532,8 +532,6 @@ module.exports = function (app) {
                 res.redirect('/index');
             });
         });
-
-
     });
 
     app.get('/viewArchive', function (req, res) {
@@ -547,7 +545,7 @@ module.exports = function (app) {
             port: '3306',
             user: 'masterAdmin',
             password: 'Pa55word',
-            database: 'dispatcherdb'
+            database: 'snapDB'
         });
 
         // Query all results from the archivedRequests table
