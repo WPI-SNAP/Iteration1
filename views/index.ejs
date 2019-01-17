@@ -11,6 +11,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
 
@@ -43,8 +44,7 @@
                         <td><%= row.rideFrom %></td>
                         <td><%= row.rideTo %></td>
                         <td><%= row.numPassengers %></td>
-                        <td class ="hasTooltip"><%= row.accommodations %>
-                            <span><%= row.accommodations %></span>
+                        <td class="hasTooltip"><%= row.accommodations %>
                         </td>
                         <td><%= row.timeIn.slice(16, 21) %></td>
                     </tr>
@@ -61,7 +61,13 @@
     <ul class="navRight">
 
         <li style="float: right">
-            <a href="/viewArchive">View Archive</a>
+            <div class="menuDiv">
+                <a href="#" class="menuIcon"><i class="material-icons">dehaze</i></a>
+            </div>
+            <nav class="menuNav">
+                <a href="/viewArchive" class="menuItem">View Archive</a>
+                <a href="#" class="menuItem">Log off</a>
+            </nav>
         </li>
         <h3 style="text-align: center">In Process Requests</h3>
     </ul>
@@ -86,8 +92,7 @@
                     <td><%= row.rideTo %></td>
                     <td><%= row.rideFrom %></td>
                     <td><%= row.numPassengers %></td>
-                    <td class = "hasTooltip"><%= row.accommodations %>
-                        <span><%= row.accommodations %></span>
+                    <td class="hasTooltip" ><%= row.accommodations %>
                     </td>
                     <td><%= row.vanNumber %></td>
                     <td><%= row.timeIn.slice(16, 21) %></td>
@@ -120,6 +125,36 @@
         });
     });
 </script>
+
+<script>
+    jQuery(document).ready(function(){
+
+        $('.hasTooltip').each(function() {
+
+            var str = $(this).text();
+            var n = str.length;
+
+            if (n > 35) // Need to figure out why there is 25 originally
+                $(this).append('<span>' + str + '</span>');
+        })
+    });
+</script>
+
+<script>
+    jQuery(document).ready(function() {
+            $("nav.menuNav").hide();
+    });
+</script>
+
+<script>
+    jQuery(document).ready(function() {
+        $('.menuDiv').click(function(){
+            $("nav.menuNav").toggle();
+        });
+    });
+</script>
+
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

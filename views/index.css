@@ -245,3 +245,34 @@ table span{
     max-width: 200px;
     white-space: normal;
 }
+
+nav.menuNav {
+    width: 300px;
+    min-height: calc(100vh - 121px);
+    background-color: #03a9f4;
+    position: absolute;
+    right: 0px;
+    transition: .3s all;
+    z-index: 2;
+
+}
+nav.menuNav > a {
+    display: block;
+    padding: 5px;
+    margin: 15px 0 0px 20px;
+    color: #494949;
+    text-transform: uppercase;
+
+}
+
+@media screen and (max-width: 425px) {
+    header h1 {
+        font-size: 16px;
+    }
+}
+@media screen and (max-width: 360px) {
+    nav.menu {
+        width: 100%;
+        left: -100%;
+    }
+}
