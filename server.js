@@ -35,6 +35,8 @@ connection.connect(function (err) {
     }
 });
 
+app.use(express.static(__dirname + '/public'));
+
 //Define express js routes
 require('./routes/routes.js')(app);
 

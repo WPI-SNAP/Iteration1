@@ -1,4 +1,4 @@
-let mysql = require('mysql');
+const mysql = require('mysql');
 const moment = require('moment');
 
 module.exports = function (app) {
@@ -417,27 +417,20 @@ module.exports = function (app) {
             password: 'Pa55word',
             database: 'snapDB'
         });
-        // Prepared statement to insert into newrequests table
-        let addRequestStmt = 'INSERT INTO inProcessRequests(idinProcessRequests, rideTo, rideFrom, numPassengers, ' +
-            'accommodations, vanNumber, timeIn) VALUES (?, ?, ?, ?, ?, ?, ?)';
 
-        let newRequest = [req.body.requestID, req.body.goingTo, req.body.comingFrom, req.body.numPassengers, req.body.accommodations, req.body.vanNumber, req.body.timeIn];
+        // Prepared statement to UPDATE into inProcessRequests table
+        let updateRequestStmt = 'UPDATE inProcessRequests SET rideTo = ?, rideFrom = ?, numPassengers = ?,' +
+            'accommodations = ?, vanNumber = ?, timeIn = ? WHERE idinProcessRequests = ?';
+
+        let updateRequest = [req.body.goingTo, req.body.comingFrom, req.body.numPassengers, req.body.accommodations,
+            req.body.vanNumber, req.body.timeIn, req.body.requestID];
 
         // Execute the insert statement
-        dispatcherDB.query(addRequestStmt, newRequest, (err, results, fields) => {
+        dispatcherDB.query(updateRequestStmt, updateRequest, (err, results, fields) => {
             if (err) {
                 return console.error(err.message);
             }
 
-            // Execute the insert statement
-            dispatcherDB.query('DELETE FROM inProcessRequests WHERE idinProcessRequests = ?', [req.body.requestID], function (error, results, fields) {
-                if (error) throw error;
-                console.log('deleted ' + results.affectedRows + ' rows');
-            });
-
-            // Retrieve inserted id
-            console.log("Going to: " + req.body.goingTo);
-            // Sends the user back to the home page
             dispatcherDB.end();
             res.redirect('/index');
         });
