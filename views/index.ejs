@@ -66,6 +66,7 @@
             </div>
             <nav class="menuNav">
                 <a href="/viewArchive" class="menuItem">View Archive</a>
+                <a href="/maintenance" class = "menuItem">Van Maintenance</a>
                 <a href="#" class="menuItem">Log off</a>
             </nav>
         </li>
@@ -134,7 +135,7 @@
             var str = $(this).text();
             var n = str.length;
 
-            if (n > 35) // Need to figure out why there is 25 originally
+            if (n > 35) // Need to figure out why there is 25 without anything typed in
                 $(this).append('<span>' + str + '</span>');
         })
     });
@@ -151,6 +152,15 @@
         $('.menuDiv').click(function(){
             $("nav.menuNav").toggle();
         });
+    });
+</script>
+
+<script>
+    jQuery(document).ready(function(){
+       var navLeft = $('navLeft').height();
+       var th = $('th').height()+navLeft;
+
+       $("th").css("top",th);
     });
 </script>
 

@@ -61,6 +61,35 @@ ul h3 {
     color:white;
 }
 
+/* Hamburger Menu */
+.menuIcon {
+    height: 25px;
+}
+
+nav.menuNav {
+    width: 300px;
+    min-height: calc(100vh - 121px);
+    background-color: #80b3ff;
+    position: absolute;
+    right: 0;
+    transition: .3s all;
+    z-index: 2;
+    border-radius:5px;
+}
+nav.menuNav > a {
+    display: block;
+    padding: 5px;
+    margin: 15px 0 0px 20px;
+    color: white;
+    text-transform: uppercase;
+
+}
+
+.menuItem:hover{
+    background-color: gray;
+}
+
+/* List */
 ul {
     list-style-type: none;
     margin: 0;
@@ -91,7 +120,9 @@ li a:hover {
 /* Table header- color and position*/
 th{
     background-color: #8B8E81;
-    position: sticky; top:0; /* This keeps header at the top*/
+
+    position: -webkit-sticky;
+    position: sticky; top: 0; /* This keeps header at the top*/
 }
 
 /* td styles */
@@ -246,33 +277,3 @@ table span{
     white-space: normal;
 }
 
-nav.menuNav {
-    width: 300px;
-    min-height: calc(100vh - 121px);
-    background-color: #03a9f4;
-    position: absolute;
-    right: 0px;
-    transition: .3s all;
-    z-index: 2;
-
-}
-nav.menuNav > a {
-    display: block;
-    padding: 5px;
-    margin: 15px 0 0px 20px;
-    color: #494949;
-    text-transform: uppercase;
-
-}
-
-@media screen and (max-width: 425px) {
-    header h1 {
-        font-size: 16px;
-    }
-}
-@media screen and (max-width: 360px) {
-    nav.menu {
-        width: 100%;
-        left: -100%;
-    }
-}

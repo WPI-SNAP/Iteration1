@@ -527,6 +527,11 @@ module.exports = function (app) {
         });
     });
 
+    // Displays Maintenance Page
+    app.get('/maintenance', function (req, res) {
+        res.render('maintenance.ejs');
+    });
+
     app.get('/viewArchive', function (req, res) {
         console.log("Inside viewArchive");
 
