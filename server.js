@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
 // Sets relative path for Express to serve files out of views folder
-//app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public'));
 //app.use(express.static(__dirname + '/views'));
 app.use(express.static(path.join(__dirname, 'views')));
 
@@ -34,8 +34,6 @@ connection.connect(function (err) {
         console.log("DB is connected!")
     }
 });
-
-app.use(express.static(__dirname + '/public'));
 
 //Define express js routes
 require('./routes/routes.js')(app);
