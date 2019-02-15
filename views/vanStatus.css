@@ -50,6 +50,7 @@ table {
 th{
     background-color: #8B8E81;
     text-align: center;
+    height:50px;
 }
 
 td {
@@ -73,8 +74,12 @@ table tr:nth-child(even) td{
     width:10%;
 }
 
+.isMaintenanced{
+    width:10%;
+}
+
 .vanInfo{
-    width:80px;
+    width:70px;
 }
 
 /* END: Table Styles */

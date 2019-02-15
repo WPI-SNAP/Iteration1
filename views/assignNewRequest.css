@@ -48,7 +48,7 @@ li a {
 
 /* Change the link color to #111 (black) on hover */
 nav div div a:hover {
-    background-color: black;
+    background-color: gray;
 }
 
 /* Navbar Styles */

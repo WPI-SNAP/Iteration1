@@ -134,6 +134,11 @@ module.exports = function (app) {
         res.render('addRequest.ejs');
     });
 
+    // Displays Admin Page
+    app.get('/admin', function (req, res) {
+        res.render('admin.ejs');
+    });
+
     // Adds the newRequest to the AWS MySQL DB
     app.post('/submitRequest', function (req, res) {
         // Connect to the dispatcher database
@@ -527,9 +532,81 @@ module.exports = function (app) {
         });
     });
 
-    // Displays Maintenance Page
+    // Display Maintenance Page
     app.get('/maintenance', function (req, res) {
-        res.render('maintenance.ejs');
+        let allMaintenance = [];
+        let currMaintenance = 0;
+
+        let dispatcherDB = mysql.createConnection({
+            host: 'snapdispatcherdb.ca40maoxylrp.us-east-1.rds.amazonaws.com',
+            port: '3306',
+            user: 'masterAdmin',
+            password: 'Pa55word',
+            database: 'snapDB'
+        });
+
+        // Select Vans that are in maintenance (isMaintenanced = TRUE)
+        dispatcherDB.query('SELECT * FROM vanStatus WHERE isMaintenanced = TRUE', (err, rows) => {
+            if (err) {
+                return console.error(err.message);
+            }
+            else {
+                for (let i in rows) {
+                    allMaintenance[currMaintenance++] = {
+                        idvanStatus: rows[i].idvanStatus,
+                        vanNumber: rows[i].vanNumber,
+                        vanInfo:rows[i].vanInfo
+                    };
+                }
+                dispatcherDB.end();
+
+                res.render('maintenance.ejs', {
+                    maintenanceRows: allMaintenance
+                });
+            }
+        })
+    });
+
+    // Display Maintenance Page
+    app.get('/vanStatus', function (req, res) {
+        let allVanStatus = [];
+        let currVanStatus = 0;
+
+        let dispatcherDB = mysql.createConnection({
+            host: 'snapdispatcherdb.ca40maoxylrp.us-east-1.rds.amazonaws.com',
+            port: '3306',
+            user: 'masterAdmin',
+            password: 'Pa55word',
+            database: 'snapDB'
+        });
+
+        // Select all from vanStatus database
+        dispatcherDB.query('SELECT * FROM vanStatus', (err, rows) => {
+            if (err) {
+                return console.error(err.message);
+            }
+            else {
+                for (let i in rows){
+                    let bool= " " ;
+                    if(rows[i].isMaintenanced == 0) {
+                        bool = "false";
+                    }else{
+                        bool="true";
+                    }
+                    allVanStatus[currVanStatus++] = {
+                        idvanStatus: rows[i].idvanStatus,
+                        vanNumber: rows[i].vanNumber,
+                        isMaintenanced:bool,
+                        vanInfo:rows[i].vanInfo
+                    };
+                }
+                dispatcherDB.end();
+
+                res.render('vanStatus.ejs', {
+                    vanStatusRows: allVanStatus
+                });
+            }
+        })
     });
 
     app.get('/viewArchive', function (req, res) {

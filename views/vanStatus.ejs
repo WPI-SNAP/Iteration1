@@ -12,7 +12,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Roboto:500,900,100,300,700,400' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="maintenance.css">
+    <link rel="stylesheet" href="vanStatus.css">
 </head>
 
 <body>
@@ -35,13 +35,15 @@
             <tr>
                 <th class="idvanStatus">ID</th>
                 <th class="vanNumber">Van Number</th>
+                <th class="isMaintenanced">isMaintenanced</th>
                 <th class="vanInfo">Information</th>
             </tr>
 
-            <% maintenanceRows.forEach(function (row) { %>
+            <% vanStatusRows.forEach(function (row) { %>
                 <tr>
                     <td ><%= row.idvanStatus %></td>
                     <td ><%= row.vanNumber %></td>
+                    <td> <%= row.isMaintenanced%></td>
                     <td ><%= row.vanInfo %></td>
                 </tr>
             <% }); %>

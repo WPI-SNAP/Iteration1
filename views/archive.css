@@ -30,7 +30,7 @@ nav ul li a {
 }
 
 li a:hover {
-    color: gray;
+    background-color: gray;
 }
 
 /* END: Navbar Styles */
@@ -44,6 +44,10 @@ h2 {
 table {
     border-collapse: collapse;
     width: 100%;
+}
+
+th{
+    background-color: #8B8E81;
 }
 
 td {
