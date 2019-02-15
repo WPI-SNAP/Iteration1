@@ -52,10 +52,12 @@ nav div div a:hover {
     background-color: #ac2b37;
 
 }
-.navbar .navbar-brand {
-    color: #ecf0f1;
-}
+
 .navbar .navbar-brand:hover,
 .navbar .navbar-brand:focus {
     color: #ffbbbc;
+}
+
+.navbar-brand{
+    color: white;
 }

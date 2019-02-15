@@ -5,7 +5,6 @@ body {
 }
 
 /* START: Navbar Styles */
-/* START: Navbar Styles */
 .navbar {
     background-color: #ac2b37;
 }
@@ -20,23 +19,18 @@ nav ul {
 }
 nav ul li {
     display: inline-block;
-    margin-left: -50%;
 }
 nav ul li a {
     display: block;
     text-decoration: none;
-    color: black;
+    color: white;
     font-weight: 800;
     font-size: larger;
     box-sizing: border-box;
 }
-nav ul li a,
-nav ul li a:after,
-nav ul li a:before {
-    transition: all 1s;
-}
-nav ul li a:hover {
-    color: white;
+
+li a:hover {
+    color: gray;
 }
 
 /* END: Navbar Styles */

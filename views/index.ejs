@@ -10,6 +10,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="index.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
@@ -19,8 +20,7 @@
 
     <!-- Left Navigation Bar -->
     <ul class="navLeft">
-        <li><a href="/addRequest">Add a Request
-            </a></li>
+        <li><a href="/addRequest" id="addReq">Add a Request</a></li>
         <h3>New Requests</h3>
     </ul>
 
@@ -39,15 +39,15 @@
 
             <% newRequestRows.forEach(function (row) { %>
 
-                    <tr class="leftTableRow clickable-row" data-id='/assignNewRequest/<%=row.idnewRequests %>'>
-                        <td><%= row.idnewRequests %></td>
-                        <td><%= row.rideFrom %></td>
-                        <td><%= row.rideTo %></td>
-                        <td><%= row.numPassengers %></td>
-                        <td class="hasTooltip"><%= row.accommodations %>
-                        </td>
-                        <td><%= row.timeIn.slice(16, 21) %></td>
-                    </tr>
+            <tr class="leftTableRow clickable-row" data-id='/assignNewRequest/<%=row.idnewRequests %>'>
+                <td><%= row.idnewRequests %></td>
+                <td><%= row.rideFrom %></td>
+                <td><%= row.rideTo %></td>
+                <td><%= row.numPassengers %></td>
+                <td class="hasTooltip"><%= row.accommodations %>
+                </td>
+                <td><%= row.timeIn.slice(16, 21) %></td>
+            </tr>
 
             <% }); %>
         </table>
@@ -67,10 +67,11 @@
             <nav class="menuNav">
                 <a href="/viewArchive" class="menuItem">View Archive</a>
                 <a href="/maintenance" class = "menuItem">Van Maintenance</a>
+                <a href="/admin" class ="menuItem">Admin</a>
                 <a href="#" class="menuItem">Log off</a>
             </nav>
         </li>
-        <h3 style="text-align: center">In Process Requests</h3>
+        <h3>In Process Requests</h3>
     </ul>
 
     <!-- Right Table -->
@@ -88,21 +89,23 @@
                 <th class="Time">Time Received</th>
             </tr>
             <% inProcessRows.forEach(function (row) { %>
-                <tr class="clickable-row-process" data-id='/assignProcessRequest/<%=row.idinProcessRequests %>'>
-                    <td><%= row.idinProcessRequests %></td>
-                    <td><%= row.rideTo %></td>
-                    <td><%= row.rideFrom %></td>
-                    <td><%= row.numPassengers %></td>
-                    <td class="hasTooltip" ><%= row.accommodations %>
-                    </td>
-                    <td><%= row.vanNumber %></td>
-                    <td><%= row.timeIn.slice(16, 21) %></td>
-                </tr>
+            <tr class="clickable-row-process" data-id='/assignProcessRequest/<%=row.idinProcessRequests %>'>
+                <td><%= row.idinProcessRequests %></td>
+                <td><%= row.rideTo %></td>
+                <td><%= row.rideFrom %></td>
+                <td><%= row.numPassengers %></td>
+                <td class="hasTooltip" ><%= row.accommodations %>
+                </td>
+                <td><%= row.vanNumber %></td>
+                <td><%= row.timeIn.slice(16, 21) %></td>
+            </tr>
             <% }); %>
 
         </table>
     </div>
 </div>
+
+
 <script>
     jQuery(document).ready(function($) {
         $(".clickable-row").dblclick(function() {
@@ -135,7 +138,7 @@
             var str = $(this).text();
             var n = str.length;
 
-            if (n > 35) // Need to figure out why there is 25 without anything typed in
+            if (n > 35)
                 $(this).append('<span>' + str + '</span>');
         })
     });
@@ -143,7 +146,7 @@
 
 <script>
     jQuery(document).ready(function() {
-            $("nav.menuNav").hide();
+        $("nav.menuNav").hide();
     });
 </script>
 
@@ -155,14 +158,6 @@
     });
 </script>
 
-<script>
-    jQuery(document).ready(function(){
-       var navLeft = $('navLeft').height();
-       var th = $('th').height()+navLeft;
-
-       $("th").css("top",th);
-    });
-</script>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

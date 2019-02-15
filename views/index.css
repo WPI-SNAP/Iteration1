@@ -1,5 +1,4 @@
 html,body{
-    height:100%;
     margin:0;
     padding:0;
 }
@@ -11,7 +10,6 @@ html,body{
 .split{
     position:absolute;
     width:50%;
-    height:100%;
 }
 
 /* Left side*/
@@ -24,14 +22,9 @@ html,body{
     right:0; /* placed at the right end */
 }
 
-
 ul h3 {
     text-align: center;
     z-index: 0;
-}
-
-#addReq {
-    z-index: 1;
 }
 
 /* Navigation Bar Styles */
@@ -46,6 +39,7 @@ ul h3 {
     z-index: 0;
     border-radius:10px; /* make the corner round*/
     color: white;
+    height: 9vh;
 }
 
 .navRight {
@@ -59,18 +53,17 @@ ul h3 {
     z-index: 0;
     border-radius:10px; /* make the corner round*/
     color:white;
+    height: 9vh;
 }
 
 /* Hamburger Menu */
-.menuIcon {
-    height: 25px;
-}
 
 nav.menuNav {
     width: 300px;
-    min-height: calc(100vh - 121px);
-    background-color: #80b3ff;
+    min-height: calc(100vh - 120px);
+    background-color: #317df7;
     position: absolute;
+    top: 9vh;
     right: 0;
     transition: .3s all;
     z-index: 2;
@@ -89,7 +82,7 @@ nav.menuNav > a {
     background-color: gray;
 }
 
-/* List */
+/* List style */
 ul {
     list-style-type: none;
     margin: 0;
@@ -98,7 +91,7 @@ ul {
     background-color: #AC2B37;
 }
 
-li {
+li{
     float: left;
 }
 
@@ -110,7 +103,11 @@ li a {
     text-decoration: none;
 }
 
-/* Change the link color to #111 (black) on hover */
+#addReq{
+    height:9vh;
+}
+
+/* Change the link color to gray on hover */
 li a:hover {
     background-color: gray;
 }
@@ -127,7 +124,7 @@ th{
 
 /* td styles */
 td{
-    height: 50px; /* temp value for fixed height*/
+    height: calc(91vh/12); /* temp value for fixed height*/
     max-width: 150px; /* temp value for max-width*/
 
     overflow:hidden; /* Prevent long text to overflow on other cells */
@@ -143,8 +140,7 @@ td{
     text-align: center;
 
     overflow-y:scroll; /* vertical scroll */
-    height: 100vh; /* necessary for scroll bar to work properly*/
-
+    height: 91vh; /* necessary for scroll bar to work properly*/
 }
 
 /*width of left scroll bar*/
@@ -172,12 +168,16 @@ td{
 }
 
 /* Making width and height of each column stable for left table*/
+.leftTable .RideID{
+    width:10%;
+}
+
 .leftTable .From{
-    width:30%;
+    width:20%;
 }
 
 .leftTable .To{
-    width:30%;
+    width:20%;
 }
 
 .leftTable .Passengers{
@@ -185,7 +185,7 @@ td{
 }
 
 .leftTable .Accom{
-    width: 20%; /*can be even smaller*/
+    width: 30%; /*can be even smaller*/
 }
 
 .leftTable .Time{
@@ -199,8 +199,9 @@ td{
     table-layout: fixed;
     text-align: center;
 
+
     overflow-y:scroll; /* vertical scroll */
-    height:100vh; /* necessary for scroll bar to work properly*/
+    height:91vh; /* necessary for scroll bar to work properly*/
 }
 
 /*width of right scroll bar*/
@@ -228,12 +229,16 @@ td{
 }
 
 /* Making width and height of each column stable for right table*/
+.rightTable .RideID{
+    width:10%;
+}
+
 .rightTable .From{
-    width:30%;
+    width:20%;
 }
 
 .rightTable .To{
-    width:30%;
+    width:20%;
 }
 
 .rightTable .Passengers{
@@ -241,7 +246,7 @@ td{
 }
 
 .rightTable .Accom{
-    width: 10%;
+    width: 20%;
 }
 
 .rightTable .vanNo{
