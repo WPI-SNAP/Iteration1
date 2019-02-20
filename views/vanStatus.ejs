@@ -21,28 +21,26 @@
 <nav class="navbar">
     <ul class="navbar-nav">
         <li>
-            <a href="/index">Home</a>
+            <a href="/admin">Back</a>
         </li>
     </ul>
 </nav>
 
 <div class="container" style="align-content: center">
 
-    <h2><b>Van in Maintenance</b></h2>
+    <h2><b>Van Status</b></h2>
     <!-- Archive Table -->
     <div>
         <table>
             <tr>
-                <th class="idvanStatus">ID</th>
-                <th class="vanNumber">Van Number</th>
-                <th class="isMaintenanced">isMaintenanced</th>
-                <th class="vanInfo">Information</th>
+                <th class="idvanStatus"> ID </th>
+                <th class="isMaintenanced"> isMaintenanced </th>
+                <th class="vanInfo"> Information </th>
             </tr>
 
             <% vanStatusRows.forEach(function (row) { %>
-                <tr>
+                <tr class="vanStatusTable clickable-row" data-id='/editVanStatus/<%=row.idvanStatus %>'>
                     <td ><%= row.idvanStatus %></td>
-                    <td ><%= row.vanNumber %></td>
                     <td> <%= row.isMaintenanced%></td>
                     <td ><%= row.vanInfo %></td>
                 </tr>
@@ -52,6 +50,19 @@
     </div>
 
 </div>
+
+
+<script>
+    jQuery(document).ready(function($) {
+        $(".clickable-row").dblclick(function() {
+            let newId = $(this).data("id");
+            if(newId) {
+                window.location = newId;
+            }
+
+        });
+    });
+</script>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

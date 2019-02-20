@@ -307,7 +307,7 @@ module.exports = function (app) {
                     };
                 }
                 dispatcherDB.end();
-                res.render('deleteNewRequest.ejs', {
+                res.render('rejectNewRequest.ejs', {
                     request: allRequests
                 });
             }
@@ -315,8 +315,8 @@ module.exports = function (app) {
     });
 
     // Deletes requests from the AWS MySQL DB
-    app.post('/submitDeleteNewRequest', function (req, res) {
-        console.log("Inside submitDeleteRequest");
+    app.post('/submitRejectNewRequest', function (req, res) {
+        console.log("Inside submitRejectRequest");
         // Connect to the dispatcher database
         let dispatcherDB = mysql.createConnection({
             host: 'snapdispatcherdb.ca40maoxylrp.us-east-1.rds.amazonaws.com',
@@ -327,10 +327,12 @@ module.exports = function (app) {
         });
 
         // Prepared statement to insert into archivedRequests table
-        let addArchivedRequestStmt = 'INSERT INTO archivedRequests(idarchivedRequests, rideTo, rideFrom, numPassengers, ' +
-            'accommodations, timeIn) VALUES (?, ?, ?, ?, ?, ?)';
+        let status = "Rejected";
 
-        let newRequest = [req.body.requestID, req.body.goingTo, req.body.comingFrom, req.body.numPassengers, req.body.accommodations, req.body.timeIn];
+        let addArchivedRequestStmt = 'INSERT INTO archivedRequests(idarchivedRequests, rideTo, rideFrom, numPassengers, ' +
+            'accommodations, timeIn, status) VALUES (?, ?, ?, ?, ?, ?,?)';
+
+        let newRequest = [req.body.requestID, req.body.goingTo, req.body.comingFrom, req.body.numPassengers, req.body.accommodations, req.body.timeIn,status];
 
         // Execute the insert statement
         dispatcherDB.query(addArchivedRequestStmt, newRequest, (err, results, fields) => {
@@ -491,15 +493,15 @@ module.exports = function (app) {
                     };
                 }
                 dispatcherDB.end();
-                res.render('deleteProcessRequest.ejs', {
+                res.render('completeProcessRequest.ejs', {
                     request: allRequests
                 });
             }
         });
     });
 
-    // Deletes requests from the AWS MySQL DB
-    app.post('/submitDeleteProcessRequest', function (req, res) {
+    // Deletes requests from the AWS MySQL DB with status Complete
+    app.post('/submitCompleteProcessRequest', function (req, res) {
         console.log("Inside submitDeleteRequest");
         // Connect to the dispatcher database
         let dispatcherDB = mysql.createConnection({
@@ -510,11 +512,49 @@ module.exports = function (app) {
             database: 'snapDB'
         });
 
+        let status = "Complete";
+
         // Prepared statement to insert into archivedRequests table
         let addArchivedRequestStmt = 'INSERT INTO archivedRequests(idarchivedRequests, rideTo, rideFrom, numPassengers, ' +
-            'accommodations, vanNumber, timeIn) VALUES (?, ?, ?, ?, ?, ?, ?)';
+            'accommodations, vanNumber, timeIn, status) VALUES (?, ?, ?, ?, ?, ?, ?,?)';
 
-        let newRequest = [req.body.requestID, req.body.goingTo, req.body.comingFrom, req.body.numPassengers, req.body.accommodations, req.body.vanNumber, req.body.timeIn];
+        let newRequest = [req.body.requestID, req.body.goingTo, req.body.comingFrom, req.body.numPassengers, req.body.accommodations, req.body.vanNumber, req.body.timeIn,status];
+
+        // Execute the insert statement
+        dispatcherDB.query(addArchivedRequestStmt, newRequest, (err, results, fields) => {
+            if (err) {
+                return console.error(err.message);
+            }
+            // Execute the insert statement
+            dispatcherDB.query('DELETE FROM inProcessRequests WHERE idinProcessRequests = ?', [req.body.requestID], function (error, results, fields) {
+                if (error) throw error;
+                console.log('deleted ' + results.affectedRows + ' rows');
+                // Sends the user back to the home page
+                dispatcherDB.end();
+                res.redirect('/index');
+            });
+        });
+    });
+
+    // Deletes requests from the AWS MySQL DB with status No-show
+    app.post('/submitNoShowProcessRequest', function (req, res) {
+        console.log("Inside submitDeleteRequest");
+        // Connect to the dispatcher database
+        let dispatcherDB = mysql.createConnection({
+            host: 'snapdispatcherdb.ca40maoxylrp.us-east-1.rds.amazonaws.com',
+            port: '3306',
+            user: 'masterAdmin',
+            password: 'Pa55word',
+            database: 'snapDB'
+        });
+
+        let status = "No-show";
+
+        // Prepared statement to insert into archivedRequests table
+        let addArchivedRequestStmt = 'INSERT INTO archivedRequests(idarchivedRequests, rideTo, rideFrom, numPassengers, ' +
+            'accommodations, vanNumber, timeIn, status) VALUES (?, ?, ?, ?, ?, ?, ?,?)';
+
+        let newRequest = [req.body.requestID, req.body.goingTo, req.body.comingFrom, req.body.numPassengers, req.body.accommodations, req.body.vanNumber, req.body.timeIn,status];
 
         // Execute the insert statement
         dispatcherDB.query(addArchivedRequestStmt, newRequest, (err, results, fields) => {
@@ -567,7 +607,7 @@ module.exports = function (app) {
         })
     });
 
-    // Display Maintenance Page
+    // Display vanStatus Page
     app.get('/vanStatus', function (req, res) {
         let allVanStatus = [];
         let currVanStatus = 0;
@@ -581,7 +621,7 @@ module.exports = function (app) {
         });
 
         // Select all from vanStatus database
-        dispatcherDB.query('SELECT * FROM vanStatus', (err, rows) => {
+        dispatcherDB.query('SELECT idvanStatus,isMaintenanced,vanInfo FROM vanStatus', (err, rows) => {
             if (err) {
                 return console.error(err.message);
             }
@@ -595,7 +635,6 @@ module.exports = function (app) {
                     }
                     allVanStatus[currVanStatus++] = {
                         idvanStatus: rows[i].idvanStatus,
-                        vanNumber: rows[i].vanNumber,
                         isMaintenanced:bool,
                         vanInfo:rows[i].vanInfo
                     };
@@ -608,6 +647,97 @@ module.exports = function (app) {
             }
         })
     });
+
+    //Displays editVanStatus Page
+    app.get('/editVanStatus/*', function (req, res) {
+        console.log("Inside editVanStatus");
+        let id = '';
+        let allRequests = [];
+        let currChar = '';
+        let numSlash = 0;
+
+        //Parse the URL and find the eventid
+        for (let i=0; i<req.url.length; i++){
+            currChar = req.url.charAt(i);
+            if(currChar === '/'){
+                numSlash++;
+                continue;
+            }
+            if(numSlash === 2) id += currChar;
+        }
+
+        console.log('Got URL: ' + req.url);
+        console.log('Looking for eventid:' + id);
+
+        let dispatcherDB = mysql.createConnection({
+            host: 'snapdispatcherdb.ca40maoxylrp.us-east-1.rds.amazonaws.com',
+            port: '3306',
+            user: 'masterAdmin',
+            password: 'Pa55word',
+            database: 'snapDB'
+        });
+
+        // Execute the select statement
+        dispatcherDB.query('SELECT * FROM vanStatus WHERE idvanStatus = ?', [id], (err, rows) => {
+            if (err) {
+                return console.error(err.message);
+            }
+            else {
+                for (let i in rows) {
+                    let bool= " " ;
+                    if(rows[i].isMaintenanced == 0) {
+                        bool = "false";
+                    }else{
+                        bool="true";
+                    }
+                    allRequests = {
+                        idvanStatus: rows[0].idvanStatus,
+                        vanNumber: rows[0].vanNumber,
+                        isMaintenanced: bool,
+                        vanInfo: rows[0].vanInfo                    };
+                }
+                dispatcherDB.end();
+                res.render('editVanStatus.ejs', {
+                    request: allRequests
+                });
+            }
+        });
+
+    });
+
+    // Apply change to the van status
+    app.post('/submitEditVanStatus', function (req, res) {
+        console.log("Inside submitEditVanStatus");
+        // Connect to the dispatcher database
+        let dispatcherDB = mysql.createConnection({
+            host: 'snapdispatcherdb.ca40maoxylrp.us-east-1.rds.amazonaws.com',
+            port: '3306',
+            user: 'masterAdmin',
+            password: 'Pa55word',
+            database: 'snapDB'
+        });
+
+        // Prepared statement to UPDATE into vanStatus table
+        let updateVanStatusStmt = 'UPDATE vanStatus SET isMaintenanced = ?, vanInfo = ?' +
+            'WHERE idvanStatus = ?';
+        console.log("Inside submitEditVanStatus1");
+
+        let updateRequest = [req.body.isMaintenanced, req.body.vanInfo,req.body.idvanStatus];
+        console.log("Inside submitEditVanStatus2");
+
+        // Execute the insert statement
+        dispatcherDB.query(updateVanStatusStmt, updateRequest, (err, results, fields) => {
+            if (err) {
+                return console.error(err.message);
+            }
+
+            dispatcherDB.end();
+            res.redirect('/vanStatus');
+        });
+
+
+    });
+
 
     app.get('/viewArchive', function (req, res) {
         console.log("Inside viewArchive");
@@ -637,7 +767,8 @@ module.exports = function (app) {
                         numPassengers: rows[i].numPassengers,
                         accommodations: rows[i].accommodations,
                         vanNumber: rows[i].vanNumber,
-                        timeIn: rows[i].timeIn
+                        timeIn: rows[i].timeIn,
+                        status:rows[i].status
                     };
                 }
                 dispatcherDB.end();

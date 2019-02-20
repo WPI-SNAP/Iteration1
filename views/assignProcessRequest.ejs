@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/assignProcessRequest.css">
 
 </head>
 <body>
@@ -22,7 +23,7 @@
         </div>
 
         <div style="float:right " class="navbar-header">
-            <a style="color: white" class="navbar-brand clickable-delete" data-id='/deleteProcessRequest/<%=request.idinProcessRequests %>'>Delete Request</a>
+            <a style="color: white" class="navbar-brand clickable-delete" data-id='/deleteProcessRequest/<%=request.idinProcessRequests %>'>Complete Request or No-Show Report</a>
         </div>
     </div>
 </nav>
@@ -64,11 +65,11 @@
 
         <div class="form-group">
             <label for="vanNumber">Assign Van Number:</label>
-            <input id="vanNumber" type="text" class="form-control" value="<%= request.vanNumber%>" name="vanNumber">
+            <input id="vanNumber" type="text" class="form-control" value="<%= request.vanNumber%>" name="vanNumber" required>
         </div>
 
         <div class="form-group text-center">
-            <input type="submit" id="submit" class="btn btn-secondary btn-lg" value="Submit">
+            <input type="submit" id="submit" class="btn btn-secondary btn-lg" value="Apply Changes">
         </div>
     </form>
 </div>

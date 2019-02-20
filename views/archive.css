@@ -65,11 +65,11 @@ table tr:nth-child(even) td{
 }
 
 .archiveFrom {
-    width: 15%;
+    width: 12.5%;
 }
 
 .archiveTo {
-    width: 15%;
+    width: 12.5%;
 }
 
 .archivePassengers {
@@ -86,5 +86,9 @@ table tr:nth-child(even) td{
 
 .archiveTime {
     width: 15%;
+}
+
+.status{
+    width:5%;
 }
 /* END: Table Styles */
