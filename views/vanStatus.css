@@ -15,8 +15,8 @@ nav {
 nav ul {
     list-style: none;
     text-align: left;
-
 }
+
 nav ul li {
     display: inline-block;
 }
@@ -70,16 +70,12 @@ table tr:nth-child(even) td{
     width:10%;
 }
 
-.vanNumber{
-    width:10%;
-}
-
 .isMaintenanced{
     width:10%;
 }
 
 .vanInfo{
-    width:70px;
+    width:80px;
 }
 
 /* END: Table Styles */

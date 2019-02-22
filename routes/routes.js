@@ -720,10 +720,8 @@ module.exports = function (app) {
         // Prepared statement to UPDATE into vanStatus table
         let updateVanStatusStmt = 'UPDATE vanStatus SET isMaintenanced = ?, vanInfo = ?' +
             'WHERE idvanStatus = ?';
-        console.log("Inside submitEditVanStatus1");
 
         let updateRequest = [req.body.isMaintenanced, req.body.vanInfo,req.body.idvanStatus];
-        console.log("Inside submitEditVanStatus2");
 
         // Execute the insert statement
         dispatcherDB.query(updateVanStatusStmt, updateRequest, (err, results, fields) => {
