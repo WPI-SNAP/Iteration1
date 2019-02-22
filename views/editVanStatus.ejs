@@ -32,19 +32,28 @@
 
     <form action="/submitEditVanStatus" method="post">
         <div class="form-group">
-            <label for="idvanStatus">ID</label>
-            <input type="text" class="form-control" id="idvanStatus" value="<%=request.idvanStatus%>" name="idvanStatus">
+            <label for="idvanStatus" class="form-label">ID:</label>
+            <input type="text" class="form-control" id="idvanStatus" value="<%=request.idvanStatus%>" name="idvanStatus" readonly>
         </div>
         <div class="form-group">
-            <label for="vanNumber">Van Number</label>
-            <input type="text" class="form-control" id="vanNumber" value="<%=request.vanNumber%>" name="vanNumber">
+            <label for="vanNumber" class="form-label">Van Number:</label>
+            <input type="text" class="form-control" id="vanNumber" value="<%=request.vanNumber%>" name="vanNumber" readonly>
         </div>
         <div class="form-group">
-            <label for="isMaintenanced"> isMaintenanced</label>
-            <input type="text" class="form-control" id="isMaintenanced" value="<%=request.isMaintenanced%>" name="isMaintenanced">
+            <fieldset>
+                <legend class="form-label">Is it under the maintenance?</legend>
+                <div class="form-check form-check-inline">
+                    <input type="radio" name="isMaintenanced" id="isMaintenanced1" value="1">
+                    <label class="form-check-label" for="isMaintenanced1">True</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="radio" name="isMaintenanced" id="isMaintenanced2" value="0" required>
+                    <label class="form-check-label" for="isMaintenanced2">False</label>
+                </div>
+            </fieldset>
         </div>
         <div class="form-group">
-            <label for="vanInfo">Information</label>
+            <label for="vanInfo" class="form-label">Information:</label>
             <input type="text" class="form-control" id="vanInfo" value="<%=request.vanInfo%>" name="vanInfo">
         </div>
 

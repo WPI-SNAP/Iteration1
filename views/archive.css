@@ -56,8 +56,12 @@ td {
 }
 
 /* alternate color of table entries*/
-table tr:nth-child(even) td{
+table tr:nth-child(odd) td{
     background-color:#ffbbbc;
+}
+
+table tr:nth-child(even) td{
+    background-color:#DCDCDC;
 }
 
 .archiveID {
